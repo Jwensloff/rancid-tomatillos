@@ -1,7 +1,9 @@
 import './MovieCard.css';
 
-function MovieCard() {
-  return <div>These are the individual movie cards</div>;
+function MovieCard({id, posterPath, title}) {
+  return (
+    <img className="moviePoster" id={id} src={posterPath} alt={`${title} movie poster`}/>
+  );
 }
 
 export default MovieCard;
