@@ -12,7 +12,7 @@ function MoviesContainer({movies}) {
   ));
 
   return (
-    <div>
+    <div className='moviesContainer'>
       {movieCards}
     </div>
   );
