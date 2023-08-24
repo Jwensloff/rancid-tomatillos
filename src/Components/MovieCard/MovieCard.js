@@ -1,9 +1,7 @@
-import './MovieCard.css'
+import './MovieCard.css';
 
 function MovieCard() {
-  return(
-    <div>These are the individual movie cards</div>
-  )
+  return <div>These are the individual movie cards</div>;
 }
 
-export default MovieCard
+export default MovieCard;
