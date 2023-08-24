@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Header from '../Header/Header';
 import MovieCard from '../MovieCard/MovieCard';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
