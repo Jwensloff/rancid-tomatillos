@@ -1,9 +1,9 @@
-import './MoviesContainer.css';
-import MovieCard from '../MoviePoster/MoviePoster';
+import './Homepage.scss';
+import MoviePoster from '../MoviePoster/MoviePoster';
 
-function MoviesContainer({ movies }) {
+function Homepage({ movies }) {
   const movieCards = movies.map((movie) => (
-    <MovieCard
+    <MoviePoster
       key={movie.id}
       id={movie.id}
       posterPath={movie.poster_path}
@@ -14,4 +14,4 @@ function MoviesContainer({ movies }) {
   return <div className='moviesContainer'>{movieCards}</div>;
 }
 
-export default MoviesContainer;
+export default Homepage;
