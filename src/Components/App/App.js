@@ -15,8 +15,7 @@ function App() {
   }, [])
 
   const displayMovieDetails = id => {
-    const movie = movies.find(movie => movie.id === id);
-    setMovieDetails(movie);
+    getMovies(id).then(data => setMovieDetails(data))
   };
 
   const backToHomePage = () => {
