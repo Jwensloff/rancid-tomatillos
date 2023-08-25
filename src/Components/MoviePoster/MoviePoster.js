@@ -1,4 +1,5 @@
 import './MoviePoster.scss';
+import PropTypes from 'prop-types'
 
 function MoviePoster({id, posterPath, title, displayMovieDetails}) {
   return (
@@ -12,3 +13,10 @@ function MoviePoster({id, posterPath, title, displayMovieDetails}) {
 }
 
 export default MoviePoster;
+
+MoviePoster.propTypes = {
+  id: PropTypes.number.isRequired,
+  posterPath: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  displayMovieDetails: PropTypes.func.isRequired
+}

@@ -1,4 +1,6 @@
 import './MovieDetail.scss'
+import PropTypes, { array, arrayOf } from 'prop-types'
+
 function MovieDetails({ movieDetails, backToHomePage }) {
   let { id, poster_path, backdrop_path, title, release_date, overview, genres, budget, revenue, runtime, tagline, average_rating} =
     movieDetails;
@@ -22,3 +24,19 @@ function MovieDetails({ movieDetails, backToHomePage }) {
 }
 
 export default MovieDetails;
+
+MovieDetails.propTypes = {
+  movieDetails: PropTypes.shape({
+    backdrop_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    tagline: PropTypes.string,
+    overview: PropTypes.string.isRequired,
+    average_rating: PropTypes.number,
+    release_date: PropTypes.string,
+    budget: PropTypes.number,
+    revenue: PropTypes.number,
+    runtime: PropTypes.number,
+    genres: arrayOf(PropTypes.string)
+  }).isRequired,
+  backToHomePage: PropTypes.func.isRequired
+}
