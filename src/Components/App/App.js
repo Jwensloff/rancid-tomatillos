@@ -2,20 +2,25 @@ import './App.scss';
 import Header from '../Header/Header';
 import Homepage from '../Homepage/Homepage';
 import movieData from './movieData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import getMovies from '../../apiCalls';
 
 function App() {
   const [movieDetails, setMovieDetails] = useState(false);
+  const [movies, setMovies] = useState([])
+  
+  useEffect(() => {
+   getMovies().then(data => setMovies(data))
+  }, [])
 
   const displayMovieDetails = id => {
     const movie = movieData.movies.find(movie => movie.id === id);
     setMovieDetails(movie);
   };
 
-  getMovies()
+
 
   const backToHomePage = () => {
     setMovieDetails(false);
