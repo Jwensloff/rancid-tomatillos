@@ -1,5 +1,23 @@
+.movieDetails {
+  border: solid 2rem maroon;
+  display: flex;
+}
 
-img{
-  height: 15rem;
-  width: auto;
+.movieDetails__img {
+  width: 70%;
+}
+
+.movieDetails__block {
+  background-color: grey;
+  width: 30%;
+  padding: 2rem;
+  position: relative;
+}
+
+.movieDetails__btn {
+  border: 0;
+  border-radius: 1rem;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
 }

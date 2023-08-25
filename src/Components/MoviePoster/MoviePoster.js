@@ -1,4 +1,4 @@
-import './MoviePoster.css';
+import './MoviePoster.scss';
 
 function MoviePoster({id, posterPath, title, displayMovieDetails}) {
   return (
