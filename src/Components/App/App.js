@@ -15,11 +15,14 @@ function App() {
   setMovieDetails(movie)
  }
 
+ const backToHomePage = () => {
+  setMovieDetails(false);
+ }
 
   return (
     <div className='App'>
       <Header />
-      {movieDetails && <MovieDetails movieDetails={movieDetails}/>}
+      {movieDetails && <MovieDetails movieDetails={movieDetails} backToHomePage={backToHomePage}/>}
       {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>}
       Hello world
     </div>
