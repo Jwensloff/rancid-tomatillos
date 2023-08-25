@@ -11,7 +11,7 @@ function App() {
  const [movieDetails, setMovieDetails] = useState(false);
 
  const displayMovieDetails = (id) => {
-  const movie = movieData.find(movie => movie.id === id)
+  const movie = movieData.movies.find(movie => movie.id === id)
   setMovieDetails(movie)
  }
 
@@ -19,8 +19,8 @@ function App() {
   return (
     <div className='App'>
       <Header />
-      <MovieDetails movieDetails={movieDetails}/>
-      {!movieDetails && <Homepage movies={movieData.movies} />}
+      {movieDetails && <MovieDetails movieDetails={movieDetails}/>}
+      {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>}
       Hello world
     </div>
   );
