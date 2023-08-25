@@ -5,7 +5,7 @@ import Homepage from '../Homepage/Homepage';
 import movieData from './movieData';
 import { useState } from 'react';
 import MovieDetails from '../MovieDetail/MovieDetail';
-
+import ErrorPage from '../ErrorPage/ErrorPage';
 function App() {
 
  const [movieDetails, setMovieDetails] = useState(false);
@@ -19,11 +19,14 @@ function App() {
   setMovieDetails(false);
  }
 
+ const error = true
+
   return (
     <div className='App'>
       <Header />
-      {movieDetails && <MovieDetails movieDetails={movieDetails} backToHomePage={backToHomePage}/>}
-      {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>}
+      {error && <ErrorPage />}
+      {/* {movieDetails && <MovieDetails movieDetails={movieDetails} backToHomePage={backToHomePage}/>} */}
+      {/* {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>} */}
       Hello world
     </div>
   );
