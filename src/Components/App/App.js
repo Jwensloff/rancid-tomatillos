@@ -1,7 +1,6 @@
 import './App.scss';
 import Header from '../Header/Header';
 import Homepage from '../Homepage/Homepage';
-import movieData from './movieData';
 import { useEffect, useState } from 'react';
 import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
@@ -16,11 +15,9 @@ function App() {
   }, [])
 
   const displayMovieDetails = id => {
-    const movie = movieData.movies.find(movie => movie.id === id);
+    const movie = movies.find(movie => movie.id === id);
     setMovieDetails(movie);
   };
-
-
 
   const backToHomePage = () => {
     setMovieDetails(false);
@@ -39,7 +36,7 @@ function App() {
         />
       ) : (
         <Homepage
-          movies={movieData.movies}
+          movies={movies}
           displayMovieDetails={displayMovieDetails}
         />
       )}
