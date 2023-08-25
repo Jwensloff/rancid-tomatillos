@@ -11,6 +11,10 @@ function MovieDetails({ movieDetails, backToHomePage }) {
         <p className='movieDetails__text'>{overview}</p>
         <p className='movieDetails__text'>{average_rating}</p>
         <p className='movieDetails__text'>{release_date}</p>
+        <p className='movieDetails__text'>{budget}</p>
+        <p className='movieDetails__text'>{revenue}</p>
+        <p className='movieDetails__text'>{runtime}</p>
+        <p className='movieDetails__text'>{genres.reduce((acc, genre) => acc + genre + ', ', 'Genres: ')}</p>
         <button className='movieDetails__btn' onClick={() => backToHomePage()}>BACK</button>
       </section>
     </section>
