@@ -1,23 +1,20 @@
 @font-face {
-  font-family: 'showTime';
-  src: url('../../fonts/showtime-font/Showtime-R9Ke.ttf') format('truetype');
+  font-family: 'upperEastSide';
+  src: url('../../fonts/upperEastSide/UpperEastSide.ttf') format('truetype');
 }
 
-
-header{
-  background-image: url('./manos-gkikas-pPA5ActWLLI-unsplash.jpg');
-  background-size: cover; 
-  background-repeat: no-repeat;
-  background-position: center top;
-  height: 40vh;
+.error-page-wrapper{
+  margin: 0px;
+  height: 60vh;
+  border: maroon solid 2rem;
+  background-color: grey; 
+  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-h1{
-  font-family: 'showTime', sans-serif;
+p{
+  font-family: 'upperEastSide', sans-serif;
   font-size: 4rem;
-  color: gold;
-  
 }

@@ -27,7 +27,6 @@ function App() {
       {error && <ErrorPage />}
       {/* {movieDetails && <MovieDetails movieDetails={movieDetails} backToHomePage={backToHomePage}/>} */}
       {/* {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>} */}
-      Hello world
     </div>
   );
 }
