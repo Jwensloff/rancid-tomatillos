@@ -1,14 +1,29 @@
 import './App.scss';
 import Header from '../Header/Header';
-import MovieCard from '../MovieCard/MovieCard';
-import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MoviePoster from '../MoviePoster/MoviePoster';
+import Homepage from '../Homepage/Homepage';
 import movieData from './movieData';
+import { useState } from 'react';
+import MovieDetails from '../MovieDetail/MovieDetail';
 
 function App() {
+
+ const [movieDetails, setMovieDetails] = useState(false);
+
+ const displayMovieDetails = (id) => {
+  const movie = movieData.movies.find(movie => movie.id === id)
+  setMovieDetails(movie)
+ }
+
+ const backToHomePage = () => {
+  setMovieDetails(false);
+ }
+
   return (
     <div className='App'>
       <Header />
-      <MoviesContainer movies={movieData.movies}/>
+      {movieDetails && <MovieDetails movieDetails={movieDetails} backToHomePage={backToHomePage}/>}
+      {!movieDetails && <Homepage movies={movieData.movies} displayMovieDetails={displayMovieDetails}/>}
       Hello world
     </div>
   );
