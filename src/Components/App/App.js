@@ -25,19 +25,21 @@ function App() {
 
   return (
     <div className='App'>
-      <Header />
       {error && <ErrorPage />}
 
       {movieDetails ? (
         <MovieDetails
-          movieDetails={movieDetails}
-          backToHomePage={backToHomePage}
+        movieDetails={movieDetails}
+        backToHomePage={backToHomePage}
         />
-      ) : (
+        ) : (
+          <>
+        <Header />
         <Homepage
           movies={movies}
           displayMovieDetails={displayMovieDetails}
         />
+        </>
       )}
     </div>
   );
