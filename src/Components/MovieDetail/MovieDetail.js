@@ -1,23 +1,38 @@
 import './MovieDetail.scss'
 import PropTypes, { array, arrayOf } from 'prop-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 function MovieDetails({ movieDetails, backToHomePage }) {
-  let { id, poster_path, backdrop_path, title, release_date, overview, genres, budget, revenue, runtime, tagline, average_rating} =
+  let { id, poster_path, backdrop_path, title, release_date, overview, genres, budget, revenue, runtime, average_rating} =
     movieDetails;
+
+    const convertMovieDuration = (runtime) => {
+      let hours = Math.floor(runtime/60);
+      let minutes = runtime%60;
+      return `${hours}h ${minutes}m`
+    }
+
+    const convertDollarAmount = (dollarAmount) => dollarAmount.toLocaleString('en-US')
+
   return (
     <section className='movieDetails'>
       <img className='movieDetails__img' src={backdrop_path} />
+        {/* <button className='movieDetails__btn' onClick={() => backToHomePage()}><i className="fa-solid fa-xmark"></i></button> */}
+<div className='button'>
+      <FontAwesomeIcon onClick={() => backToHomePage()} icon={faXmark} color='white' size='2x'/>
+</div>
       <section className='movieDetails__block'>
-        <h2 className='movieDetails__title'>{title}</h2>
-        <p className='movieDetails__text'>{tagline}</p>
-        <p className='movieDetails__text'>{overview}</p>
-        <p className='movieDetails__text'>{average_rating}</p>
-        <p className='movieDetails__text'>{release_date}</p>
-        <p className='movieDetails__text'>{budget}</p>
-        <p className='movieDetails__text'>{revenue}</p>
-        <p className='movieDetails__text'>{runtime}</p>
-        <p className='movieDetails__text'>{genres.reduce((acc, genre) => acc + genre + ', ', 'Genres: ')}</p>
-        <button className='movieDetails__btn' onClick={() => backToHomePage()}>BACK</button>
+    <h2 className='movieDetails__title'>{title}</h2>
+        <div className='movie-details-sub'>
+          <p className='movieDetails__text'>{average_rating} / 10</p>
+          <p className='movieDetails__text'>{convertMovieDuration(runtime)}</p>
+          <p className='movieDetails__text'>{genres.join(', ')}</p>
+          <p className='movieDetails__text'>{release_date.slice(0, 4)}</p>
+          <p className='movieDetails__text'>Budget: ${convertDollarAmount(budget)}</p>
+          <p className='movieDetails__text'>Revenue: ${convertDollarAmount(revenue)}</p>
+        </div>
+        <p className='movieDetails__text overview'>{overview}</p>
       </section>
     </section>
   );
