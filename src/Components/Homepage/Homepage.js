@@ -1,5 +1,7 @@
 import './Homepage.scss';
 import MoviePoster from '../MoviePoster/MoviePoster';
+import { arrayOf } from 'prop-types';
+import PropTypes from 'prop-types'
 
 function Homepage({ movies, displayMovieDetails }) {
   const movieCards = movies.map((movie) => (
@@ -16,3 +18,8 @@ function Homepage({ movies, displayMovieDetails }) {
 }
 
 export default Homepage;
+
+Homepage.propTypes = {
+  movies: arrayOf(PropTypes.object).isRequired,
+  displayMovieDetails: PropTypes.func.isRequired
+}
