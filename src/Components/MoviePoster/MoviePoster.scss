@@ -3,6 +3,7 @@
   box-shadow: 0 0 .3rem .2rem rgba(0, 0, 0, 0.4);
 
   &:hover {
-    border: solid 2px maroon;
+    border: solid 0.2rem maroon;
+    cursor: pointer;
   }
 }
