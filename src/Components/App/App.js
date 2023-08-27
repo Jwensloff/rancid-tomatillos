@@ -8,49 +8,49 @@ import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
 
 function App() {
-  const [homepage, setHomepage] = useState(true);
-  const [movieDetails, setMovieDetails] = useState(false);
+  const [onHomepage, setOnHomepage] = useState(true);
+  const [onMovieDetails, setOnMovieDetails] = useState(false);
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
-  const [watchTrailer, setWatchTrailer] = useState(false);
+  const [onWatchTrailer, setOnWatchTrailer] = useState(false);
 
   useEffect(() => {
     getMovies().then((data) => setMovies(data));
   }, []);
 
   const displayMovieDetails = (id) => {
-    setHomepage(false);
-    getMovies(id).then((data) => setMovieDetails(data));
+    setOnHomepage(false);
+    getMovies(id).then((data) => setOnMovieDetails(data));
     getMovieTrailer(id).then((data) => setTrailer(data));
-    setWatchTrailer(false);
+    setOnWatchTrailer(false);
   };
 
   const backToHomePage = () => {
-    setMovieDetails(false);
-    setHomepage(true);
-    setWatchTrailer(false);
+    setOnMovieDetails(false);
+    setOnHomepage(true);
+    setOnWatchTrailer(false);
   };
   const error = false;
 
   const displayTrailer = () => {
-    setWatchTrailer(true);
-    setMovieDetails(false);
+    setOnWatchTrailer(true);
+    setOnMovieDetails(false);
   };
 
   return (
     <div className='App'>
       {error && <ErrorPage />}
 
-      {watchTrailer && <Trailer backToHomePage={backToHomePage} trailer={trailer} displayMovieDetails={displayMovieDetails} />}
-      {movieDetails && (
+      {onWatchTrailer && <Trailer backToHomePage={backToHomePage} trailer={trailer} displayMovieDetails={displayMovieDetails} />}
+      {onMovieDetails && (
         <MovieDetails
           displayTrailer={displayTrailer}
-          movieDetails={movieDetails}
+          onMovieDetails={onMovieDetails}
           backToHomePage={backToHomePage}
         />
       )}
 
-      {homepage && (
+      {onHomepage && (
         <>
           <Header />
           <Homepage movies={movies} displayMovieDetails={displayMovieDetails} />
