@@ -6,6 +6,7 @@ import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
+
 function App() {
   const [homepage, setHomepage] = useState(true);
   const [movieDetails, setMovieDetails] = useState(false);

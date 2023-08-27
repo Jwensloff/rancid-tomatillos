@@ -4,7 +4,9 @@ function Trailer ({ trailer }) {
 const { key } = trailer
 
   return (
-  <div className="video-responsive">
+  <div className="trailer-page">
+    <button>Home</button>
+    <button>Back to movie</button>
     <iframe
       width="853"
       height="480"
