@@ -46,6 +46,7 @@ function App() {
     setindividualMovie(false);
     setOnHomepage(true);
     setOnWatchTrailer(false);
+    setError({hasError: false, msg: '', failedAt: ''})
   };
 
   const displayTrailer = () => {
@@ -73,15 +74,15 @@ function App() {
       )}
 
       {onHomepage && (
-        <>
+        <div className='page'>
           <Header />
           <Homepage
             movies={movies}
             displayMovieDetails={displayMovieDetails}
           />
-        </>
+        </div>
       )}
-      {error.hasError && <ErrorPage error={error} />}
+      {error.hasError && <ErrorPage error={error} backToHomePage={backToHomePage}/>}
     </div>
   );
 }
