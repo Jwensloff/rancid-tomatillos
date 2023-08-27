@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function MovieDetails({ movieDetails, backToHomePage }) {
+function MovieDetails({ movieDetails, backToHomePage, displayTrailer }) {
   let {
     id,
     poster_path,
@@ -47,7 +47,7 @@ function MovieDetails({ movieDetails, backToHomePage }) {
       <section className='movieDetails__block'>
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
-          <button className='trailer-btn'>
+          <button className='trailer-btn' onClick={ () => displayTrailer() } >
             <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='1.5x' />  Trailer</button>
         </div>
         <div className='movie-details-sub'>
