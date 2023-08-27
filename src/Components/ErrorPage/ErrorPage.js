@@ -1,11 +1,15 @@
+import Header from '../Header/Header';
 import './ErrorPage.scss';
 
-function ErrorPage() {
+function ErrorPage({error}) {
 
   return (
+    
     <section>
+      {error.failedAt === 'homePage' && <Header />}
+      {error.failedAt === 'individualMovie' && <button>Back to homepage</button>}
       <div className='error-page-wrapper'>
-      <p>Oops! Something went wrong. Please try again later.</p>
+      <p>{error.msg}</p>
       </div>
     </section>
   )

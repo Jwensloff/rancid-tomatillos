@@ -13,20 +13,26 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
   const [hasTrailer, setHasTrailer] = useState(true);
 
   useEffect(() => {
     getMovies()
       .then(data => setMovies(data))
-      .catch(error => setError(true));
+      .catch(error => {
+        setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
+        setOnHomepage(false)
+      });
   }, []);
 
   const displayMovieDetails = id => {
     setOnHomepage(false);
-    getMovies(id, setError)
+    getMovies(id)
       .then(data => setindividualMovie(data))
-      .catch(error => setError(true));
+      .catch(error => {
+        setError({hasError: true, msg: `${error}`, failedAt: 'individualMovie'})
+        setOnHomepage(false)
+      });
     getMovieTrailer(id)
       .then(data => {
         setHasTrailer(true)
@@ -49,6 +55,7 @@ function App() {
 
   return (
     <div className='App'>
+
       {onWatchTrailer && (
         <Trailer
           backToHomePage={backToHomePage}
@@ -71,10 +78,10 @@ function App() {
           <Homepage
             movies={movies}
             displayMovieDetails={displayMovieDetails}
-            error={error}
           />
         </>
       )}
+      {error.hasError && <ErrorPage error={error} />}
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import './Homepage.scss';
 import MoviePoster from '../MoviePoster/MoviePoster';
 import { arrayOf } from 'prop-types';
-import PropTypes from 'prop-types'
-import ErrorPage from '../ErrorPage/ErrorPage';
+import PropTypes from 'prop-types';
 
-function Homepage({ movies, displayMovieDetails , error}) {
-  const movieCards = movies.map((movie) => (
+function Homepage({ movies, displayMovieDetails }) {
+  const movieCards = movies.map(movie => (
     <MoviePoster
       key={movie.id}
       id={movie.id}
@@ -15,15 +14,12 @@ function Homepage({ movies, displayMovieDetails , error}) {
     />
   ));
 
-  return <div className='moviesContainer'>
-    {error && <ErrorPage />}
-    {movieCards}
-  </div>;
+  return <div className='moviesContainer'>{movieCards}</div>;
 }
 
 export default Homepage;
 
 Homepage.propTypes = {
   movies: arrayOf(PropTypes.object).isRequired,
-  displayMovieDetails: PropTypes.func.isRequired
-}
+  displayMovieDetails: PropTypes.func.isRequired,
+};

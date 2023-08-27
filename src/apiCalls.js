@@ -1,29 +1,35 @@
- 
- 
- function getMovies(id) {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id || ''}`)
-    .then(resp =>{
-      return resp.json()
+function getMovies(id) {
+  return fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id || ''}`,
+  )
+    .then(resp => {
+      if (resp.status >= 500 && !resp.status <= 599) {
+        throw new Error('Oops! Something went wrong, try again later.');
+      }
+      if (resp.status === 404) {
+        throw new Error('404: page not found');
+      }
+      return resp.json();
     })
     .then(data => {
       if (!id) {
-        return data.movies
+        return data.movies;
       }
-      return data.movie
-    })
+      return data.movie;
+    });
 }
 
 function getMovieTrailer(id) {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`)
+  return fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`,
+  )
     .then(resp => resp.json())
     .then(data => {
-      console.log(data)
-      if(!data.videos.length) {
-        throw new Error ('No trailer found.')
+      if (!data.videos.length) {
+        throw new Error('No trailer found.');
       }
-      return data.videos.find(video => video.type=== "Trailer")
-    })
+      return data.videos.find(video => video.type === 'Trailer');
+    });
 }
 
-export { getMovies, getMovieTrailer }
-
+export { getMovies, getMovieTrailer };
