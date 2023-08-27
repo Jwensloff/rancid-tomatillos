@@ -22,11 +22,13 @@ function App() {
     setHomepage(false);
     getMovies(id).then((data) => setMovieDetails(data));
     getMovieTrailer(id).then((data) => setTrailer(data));
+    setWatchTrailer(false);
   };
 
   const backToHomePage = () => {
     setMovieDetails(false);
     setHomepage(true);
+    setWatchTrailer(false);
   };
   const error = false;
 
@@ -39,7 +41,7 @@ function App() {
     <div className='App'>
       {error && <ErrorPage />}
 
-      {watchTrailer && <Trailer trailer={trailer} />}
+      {watchTrailer && <Trailer backToHomePage={backToHomePage} trailer={trailer} displayMovieDetails={displayMovieDetails} />}
       {movieDetails && (
         <MovieDetails
           displayTrailer={displayTrailer}

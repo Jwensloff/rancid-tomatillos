@@ -1,12 +1,16 @@
 import './Trailer.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-function Trailer ({ trailer }) {
-const { key } = trailer
+function Trailer ({ trailer, displayMovieDetails, backToHomePage }) {
+const { key, movie_id } = trailer
 
   return (
   <div className="trailer-page">
-    <button>Home</button>
-    <button>Back to movie</button>
+    <div className='button-wrapper'>
+      <button onClick={() => displayMovieDetails(movie_id)} ><FontAwesomeIcon icon={faCircleArrowLeft} /></button>
+      <button onClick={() => backToHomePage()} > <FontAwesomeIcon icon={faHouse} /> </button>
+    </div>
     <iframe
       width="853"
       height="480"

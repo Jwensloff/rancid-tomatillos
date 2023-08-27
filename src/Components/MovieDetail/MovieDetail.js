@@ -48,7 +48,7 @@ function MovieDetails({ movieDetails, backToHomePage, displayTrailer }) {
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
           <button className='trailer-btn' onClick={ () => displayTrailer() } >
-            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='1.5x' />  Trailer</button>
+            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />  Trailer</button>
         </div>
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
