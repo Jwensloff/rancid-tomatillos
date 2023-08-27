@@ -9,7 +9,7 @@ import Trailer from '../Trailer/Trailer';
 
 function App() {
   const [onHomepage, setOnHomepage] = useState(true);
-  const [onMovieDetails, setOnMovieDetails] = useState(false);
+  const [individualMovie, setindividualMovie] = useState(false);
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
@@ -20,13 +20,13 @@ function App() {
 
   const displayMovieDetails = (id) => {
     setOnHomepage(false);
-    getMovies(id).then((data) => setOnMovieDetails(data));
+    getMovies(id).then((data) => setindividualMovie(data));
     getMovieTrailer(id).then((data) => setTrailer(data));
     setOnWatchTrailer(false);
   };
 
   const backToHomePage = () => {
-    setOnMovieDetails(false);
+    setindividualMovie(false);
     setOnHomepage(true);
     setOnWatchTrailer(false);
   };
@@ -34,7 +34,7 @@ function App() {
 
   const displayTrailer = () => {
     setOnWatchTrailer(true);
-    setOnMovieDetails(false);
+    setindividualMovie(false);
   };
 
   return (
@@ -42,10 +42,10 @@ function App() {
       {error && <ErrorPage />}
 
       {onWatchTrailer && <Trailer backToHomePage={backToHomePage} trailer={trailer} displayMovieDetails={displayMovieDetails} />}
-      {onMovieDetails && (
+      {individualMovie && (
         <MovieDetails
           displayTrailer={displayTrailer}
-          onMovieDetails={onMovieDetails}
+          individualMovie={individualMovie}
           backToHomePage={backToHomePage}
         />
       )}

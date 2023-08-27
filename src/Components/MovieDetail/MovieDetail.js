@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function MovieDetails({ movieDetails, backToHomePage, displayTrailer }) {
+function MovieDetails({ individualMovie, backToHomePage, displayTrailer }) {
   let {
     id,
     poster_path,
@@ -17,7 +17,7 @@ function MovieDetails({ movieDetails, backToHomePage, displayTrailer }) {
     revenue,
     runtime,
     average_rating,
-  } = movieDetails;
+  } = individualMovie;
 
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
