@@ -2,8 +2,9 @@ import './MovieDetail.scss';
 import PropTypes, { array, arrayOf } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function MovieDetails({ movieDetails, backToHomePage }) {
+function MovieDetails({ movieDetails, backToHomePage, displayTrailer }) {
   let {
     id,
     poster_path,
@@ -24,8 +25,13 @@ function MovieDetails({ movieDetails, backToHomePage }) {
     return `${hours}h ${minutes}m`;
   };
 
-  const convertDollarAmount = (dollarAmount) =>
-    dollarAmount.toLocaleString('en-US');
+  const convertDollarAmount = (dollarAmount) => {
+    if (!dollarAmount) {
+      return 'N/A';
+    } else {
+      return `$${dollarAmount.toLocaleString('en-US')}`;
+    }
+  };
 
   return (
     <section className='movieDetails'>
@@ -39,17 +45,21 @@ function MovieDetails({ movieDetails, backToHomePage }) {
         />
       </div>
       <section className='movieDetails__block'>
-        <h2 className='movieDetails__title'>{title}</h2>
+        <div className='title-wrapper'>
+          <h2 className='movieDetails__title'>{title}</h2>
+          <button className='trailer-btn' onClick={ () => displayTrailer() } >
+            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />  Trailer</button>
+        </div>
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
           <p className='movieDetails__text'>{convertMovieDuration(runtime)}</p>
           <p className='movieDetails__text'>{genres.join(', ')}</p>
           <p className='movieDetails__text'>{release_date.slice(0, 4)}</p>
           <p className='movieDetails__text'>
-            Budget: ${convertDollarAmount(budget)}
+            Budget: {convertDollarAmount(budget)}
           </p>
           <p className='movieDetails__text'>
-            Revenue: ${convertDollarAmount(revenue)}
+            Revenue: {convertDollarAmount(revenue)}
           </p>
         </div>
         <p className='movieDetails__text overview'>{overview}</p>
