@@ -6,9 +6,6 @@
 .error-page-wrapper{
   margin: 0px;
   height: 60vh;
-  border: maroon solid 2rem;
-  background-color: grey; 
-  padding: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,4 +14,5 @@
 p{
   font-family: 'upperEastSide', sans-serif;
   font-size: 4rem;
+  color: white;
 }

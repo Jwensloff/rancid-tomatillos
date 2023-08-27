@@ -13,15 +13,26 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+  const [error, setError] = useState(false);
+  const [hasTrailer, setHasTrailer] = useState(true);
 
   useEffect(() => {
-    getMovies().then((data) => setMovies(data));
+    getMovies()
+      .then(data => setMovies(data))
+      .catch(error => setError(true));
   }, []);
 
-  const displayMovieDetails = (id) => {
+  const displayMovieDetails = id => {
     setOnHomepage(false);
-    getMovies(id).then((data) => setindividualMovie(data));
-    getMovieTrailer(id).then((data) => setTrailer(data));
+    getMovies(id, setError)
+      .then(data => setindividualMovie(data))
+      .catch(error => setError(true));
+    getMovieTrailer(id)
+      .then(data => {
+        setHasTrailer(true)
+        return setTrailer(data);
+      })
+      .catch(error => setHasTrailer(false));
     setOnWatchTrailer(false);
   };
 
@@ -30,7 +41,6 @@ function App() {
     setOnHomepage(true);
     setOnWatchTrailer(false);
   };
-  const error = false;
 
   const displayTrailer = () => {
     setOnWatchTrailer(true);
@@ -39,21 +49,30 @@ function App() {
 
   return (
     <div className='App'>
-      {error && <ErrorPage />}
-
-      {onWatchTrailer && <Trailer backToHomePage={backToHomePage} trailer={trailer} displayMovieDetails={displayMovieDetails} />}
+      {onWatchTrailer && (
+        <Trailer
+          backToHomePage={backToHomePage}
+          trailer={trailer}
+          displayMovieDetails={displayMovieDetails}
+        />
+      )}
       {individualMovie && (
         <MovieDetails
           displayTrailer={displayTrailer}
           individualMovie={individualMovie}
           backToHomePage={backToHomePage}
+          hasTrailer={hasTrailer}
         />
       )}
 
       {onHomepage && (
         <>
           <Header />
-          <Homepage movies={movies} displayMovieDetails={displayMovieDetails} />
+          <Homepage
+            movies={movies}
+            displayMovieDetails={displayMovieDetails}
+            error={error}
+          />
         </>
       )}
     </div>

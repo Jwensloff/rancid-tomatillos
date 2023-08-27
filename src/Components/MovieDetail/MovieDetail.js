@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function MovieDetails({ individualMovie, backToHomePage, displayTrailer }) {
+function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTrailer}) {
   let {
     id,
     poster_path,
@@ -47,8 +47,8 @@ function MovieDetails({ individualMovie, backToHomePage, displayTrailer }) {
       <section className='movieDetails__block'>
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
-          <button className='trailer-btn' onClick={ () => displayTrailer() } >
-            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />  Trailer</button>
+          {hasTrailer && <button className='trailer-btn' onClick={ () => displayTrailer() } >
+            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />  Trailer</button>}
         </div>
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
@@ -71,7 +71,7 @@ function MovieDetails({ individualMovie, backToHomePage, displayTrailer }) {
 export default MovieDetails;
 
 MovieDetails.propTypes = {
-  movieDetails: PropTypes.shape({
+  individualMovie: PropTypes.shape({
     backdrop_path: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     tagline: PropTypes.string,

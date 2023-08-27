@@ -1,6 +1,7 @@
 import './Trailer.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types'
 
 function Trailer ({ trailer, displayMovieDetails, backToHomePage }) {
 const { key, movie_id } = trailer
@@ -25,3 +26,10 @@ const { key, movie_id } = trailer
 }
 
 export default Trailer;
+
+Trailer.defaultProps = {
+  trailer: {
+    key: null,
+    movie_id: null
+  }
+}
