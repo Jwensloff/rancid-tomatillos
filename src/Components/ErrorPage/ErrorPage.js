@@ -1,11 +1,17 @@
+import Header from '../Header/Header';
 import './ErrorPage.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons'
 
-function ErrorPage() {
+function ErrorPage({error, backToHomePage}) {
 
   return (
-    <section>
-      <div className='error-page-wrapper'>
-      <p>Oops! Something went wrong. Please try again later.</p>
+    
+    <section className='error-page-wrapper'>
+      {error.failedAt === 'homePage' && <Header />}
+      {error.failedAt === 'individualMovie' && <button className='exitError-btn' onClick={() => backToHomePage()} > <FontAwesomeIcon icon={faHouse} /> </button>}
+      <div className='error-wrapper'>
+        <p>{error.msg}</p>
       </div>
     </section>
   )
