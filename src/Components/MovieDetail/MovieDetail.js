@@ -3,6 +3,7 @@ import PropTypes, { array, arrayOf } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { Link } from 'react-router-dom';
 
 function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTrailer}) {
   let {
@@ -36,14 +37,14 @@ function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTra
   return (
     <section className='movieDetails'>
       <img className='movieDetails__img' src={backdrop_path} />
-      <div className='button'>
+      <Link className='button' to='/'>
         <FontAwesomeIcon
-          onClick={() => backToHomePage()}
+          // onClick={() => backToHomePage()}
           icon={faXmark}
           color='white'
           size='2x'
         />
-      </div>
+      </Link>
       <section className='movieDetails__block'>
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
