@@ -28,6 +28,7 @@ function getMovieTrailer(id) {
       if (!data.videos.length) {
         throw new Error('No trailer found.');
       }
+      console.log(data)
       return data.videos.find(video => video.type === 'Trailer');
     });
 }

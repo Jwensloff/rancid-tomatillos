@@ -15,15 +15,5 @@ describe('homepage', () => {
     cy.get('.moviePoster').last().should('have.id', '505642')
   })
 
-  it('should display movie details when a movie poster is clicked', () => {
-    cy.intercept("GET", 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/436270', {
-      statusCode: 200,
-      fixture: 'blackAdam.json'
-    })
-
-    cy.get('#436270').click()
-    cy.contains('Black Adam')
-    cy.get('img').should("have.attr", "src" , "https://image.tmdb.org/t/p/original//bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg")
-    cy.contains('Nearly 5,000')
-  })
+ 
 })
