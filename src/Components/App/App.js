@@ -85,7 +85,6 @@ function App() {
           path='/'
           element={
             <>
-              {' '}
               <Header />
               <Homepage
                 movies={movies}
@@ -105,6 +104,7 @@ function App() {
             />
           }
         />
+        <Route path='/:id/:trailer' element={<Trailer/>}/>
       </Routes>
       {/* {onHomepage && (
         <div className='page'>

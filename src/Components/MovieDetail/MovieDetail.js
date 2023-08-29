@@ -5,7 +5,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
-function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTrailer}) {
+function MovieDetails({
+  individualMovie,
+  backToHomePage,
+  displayTrailer,
+  hasTrailer,
+}) {
   let {
     id,
     poster_path,
@@ -48,8 +53,14 @@ function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTra
       <section className='movieDetails__block'>
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
-          {hasTrailer && <button className='trailer-btn' onClick={ () => displayTrailer() } >
-            <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />  Trailer</button>}
+          {hasTrailer && (
+            <Link to={`/${id}/trailer`}>
+              <button className='trailer-btn' onClick={() => displayTrailer()}>
+                <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
+                Trailer
+              </button>
+            </Link>
+          )}
         </div>
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
