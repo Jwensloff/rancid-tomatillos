@@ -10,7 +10,7 @@ function Homepage({ movies, displayMovieDetails }) {
       id={movie.id}
       posterPath={movie.poster_path}
       title={movie.title}
-      displayMovieDetails={displayMovieDetails}
+      // displayMovieDetails={displayMovieDetails}
     />
   ));
 

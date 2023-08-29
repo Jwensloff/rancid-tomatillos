@@ -1,6 +1,6 @@
-function getMovies(id) {
+function getMovies() {
   return fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id || ''}`,
+    `https://rancid-tomatillos.herokuapp.com/api/v2/movies`,
   )
     .then(resp => {
       
@@ -10,15 +10,37 @@ function getMovies(id) {
       if (resp.status === 404) {
         throw new Error('404: page not found');
       }
-      
+      console.log(resp)
       return resp.json();
     })
-    .then(data => {
-      if (!id) {
-        return data.movies;
+    // .then(data => {
+    //   console.log('from api calls: all movie data', data.movies)
+    //   return data.movie;
+    // });
+}
+
+function getMovieDetails(id) {
+  return fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`,
+  )
+    .then(resp => {
+      
+      if (resp.status >= 500 && !resp.status <= 599) {
+        throw new Error('Oops! Something went wrong, try again later.');
       }
-      return data.movie;
-    });
+      if (resp.status === 404) {
+        throw new Error('404: page not found');
+      }
+      console.log('single movie response', resp)
+      return resp.json();
+    })
+    // .then(data => {
+    //   if (!id) {
+    //     return data.movies;
+    //   }
+    //   console.log('from api calls: single movie data', data)
+    //   return data.movie;
+    // });
 }
 
 function getMovieTrailer(id) {
@@ -35,4 +57,4 @@ function getMovieTrailer(id) {
     });
 }
 
-export { getMovies, getMovieTrailer };
+export { getMovies, getMovieTrailer, getMovieDetails };

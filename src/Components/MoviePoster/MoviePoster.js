@@ -1,14 +1,14 @@
 import './MoviePoster.scss';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 function MoviePoster({id, posterPath, title, displayMovieDetails}) {
   return (
-    <Link to={`/${id}`}>
+    <Link to={`${id}`}>
       <img 
       className="moviePoster" 
       id={id} src={posterPath} 
       alt={`${title} movie poster`} 
-      onClick={() => displayMovieDetails(id)}
+      // onClick={() => displayMovieDetails(id)}
       />
     </Link>
   );

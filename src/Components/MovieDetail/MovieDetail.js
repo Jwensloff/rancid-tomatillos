@@ -3,27 +3,64 @@ import PropTypes, { array, arrayOf } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { getMovies, getMovieTrailer, getMovieDetails } from '../../apiCalls';
+import { useEffect, useState } from 'react';
 
 function MovieDetails({
-  individualMovie,
-  backToHomePage,
-  displayTrailer,
+  // individualMovie,
+  // backToHomePage,
+  // displayTrailer,
+  getMovieDetails,
   hasTrailer,
 }) {
-  let {
-    id,
-    poster_path,
-    backdrop_path,
-    title,
-    release_date,
-    overview,
-    genres,
-    budget,
-    revenue,
-    runtime,
-    average_rating,
-  } = individualMovie;
+  const [individualMovie, setindividualMovie] = useState(false);
+  // const [onHomepage, setOnHomepage] = useState(true);
+  // const [movies, setMovies] = useState([]);
+  const [trailer, setTrailer] = useState({});
+  // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+  // const [error, setError] = useState({
+    //   hasError: false,
+    //   msg: '',
+    //   failedAt: '',
+    // });
+    useEffect(() =>{
+      // setOnHomepage(false);
+      getMovieDetails()
+      .then((data) => {
+        console.log(data)
+       return setindividualMovie(data)})
+      .catch((error) => {
+        // setError({
+          //   hasError: true,
+          //   msg: `${error}`,
+          //   failedAt: 'individualMovie',
+          // });
+          // setOnHomepage(false);
+        });
+        getMovieTrailer(id)
+        .then((data) => {
+          // setHasTrailer(true);
+          return setTrailer(data);
+        })
+        // .catch((error) => setHasTrailer(false));
+        // setOnWatchTrailer(false);
+      }, [])
+      let {
+        id,
+        poster_path,
+        backdrop_path,
+        title,
+        release_date,
+        overview,
+        genres,
+        budget,
+        revenue,
+        runtime,
+        average_rating,
+      } = individualMovie;
+      
+      
 
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
@@ -38,6 +75,10 @@ function MovieDetails({
       return `$${dollarAmount.toLocaleString('en-US')}`;
     }
   };
+  console.log(useParams())
+  console.log(' id', id)
+
+
 
   return (
     <section className='movieDetails'>
@@ -54,8 +95,9 @@ function MovieDetails({
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
           {hasTrailer && (
-            <Link to={`/${id}/trailer`}>
-              <button className='trailer-btn' onClick={() => displayTrailer()}>
+            <Link to={`/:${id}/trailer`}>
+              <button className='trailer-btn' >
+              {/* <button className='trailer-btn' onClick={() => displayTrailer()}> */}
                 <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
                 Trailer
               </button>

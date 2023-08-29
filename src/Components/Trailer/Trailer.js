@@ -13,7 +13,7 @@ function Trailer({ trailer, displayMovieDetails, backToHomePage }) {
         <Link to={`/${movie_id}`}>
           <button
             className='back-to-movie-details-button'
-            onClick={() => displayMovieDetails(movie_id)}
+            // onClick={() => displayMovieDetails(movie_id)}
           >
             <FontAwesomeIcon icon={faCircleArrowLeft} />
           </button>
@@ -21,7 +21,7 @@ function Trailer({ trailer, displayMovieDetails, backToHomePage }) {
         <Link to='/'>
           <button
             className='back-to-home-button'
-            onClick={() => backToHomePage()}
+            // onClick={() => backToHomePage()}
           >
             <FontAwesomeIcon icon={faHouse} />
           </button>
