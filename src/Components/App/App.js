@@ -21,21 +21,21 @@ function App() {
   });
   const [hasTrailer, setHasTrailer] = useState(true);
 
-  console.log('movies before', movies);
+  // console.log('movies before', movies);
 
   useEffect(() => {
-    console.log('UseEffect is firing from app.js');
+    // console.log('UseEffect is firing from app.js');
     getMovies()
       .then((data) => {
-        console.log('from App.js', data);
+        // console.log('from App.js', data);
         return setMovies(data.movies);
       })
       .catch((error) => {
         // setError({ hasError: true, msg: `${error}`, failedAt: 'homePage' });
-        console.log('an error has occured');
+        // console.log('an error has occured');
       });
   }, []);
-  console.log('movies after', movies);
+  // console.log('movies after', movies);
 
   // const displayMovieDetails = (id) => {
   //   setOnHomepage(false);

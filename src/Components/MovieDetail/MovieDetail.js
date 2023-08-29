@@ -11,7 +11,7 @@ function MovieDetails({
   // individualMovie,
   // backToHomePage,
   // displayTrailer,
-  getMovieDetails,
+  // getMovieDetails,
   hasTrailer,
 }) {
   const [individualMovie, setindividualMovie] = useState(false);
@@ -24,12 +24,14 @@ function MovieDetails({
     //   msg: '',
     //   failedAt: '',
     // });
+    const movieID = useParams().id
     useEffect(() =>{
-      // setOnHomepage(false);
-      getMovieDetails()
+console.log('useEffect is firing from the MovieDetails')  
+
+ getMovieDetails(movieID)
       .then((data) => {
-        console.log(data)
-       return setindividualMovie(data)})
+        console.log('individual movie data',data)
+       return setindividualMovie(data.movie)})
       .catch((error) => {
         // setError({
           //   hasError: true,
@@ -61,7 +63,7 @@ function MovieDetails({
       } = individualMovie;
       
       
-
+      console.log('individualMovie',individualMovie)
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
     let minutes = runtime % 60;
@@ -75,7 +77,7 @@ function MovieDetails({
       return `$${dollarAmount.toLocaleString('en-US')}`;
     }
   };
-  console.log(useParams())
+
   console.log(' id', id)
 
 

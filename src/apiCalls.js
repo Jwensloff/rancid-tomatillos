@@ -25,22 +25,20 @@ function getMovieDetails(id) {
   )
     .then(resp => {
       
-      if (resp.status >= 500 && !resp.status <= 599) {
-        throw new Error('Oops! Something went wrong, try again later.');
-      }
-      if (resp.status === 404) {
-        throw new Error('404: page not found');
-      }
+      // if (resp.status >= 500 && !resp.status <= 599) {
+      //   throw new Error('Oops! Something went wrong, try again later.');
+      // }
+      // if (resp.status === 404) {
+      //   throw new Error('404: page not found');
+      // }
       console.log('single movie response', resp)
       return resp.json();
     })
-    // .then(data => {
-    //   if (!id) {
-    //     return data.movies;
-    //   }
-    //   console.log('from api calls: single movie data', data)
-    //   return data.movie;
-    // });
+    .then(data => {
+  
+      console.log('from api calls: single movie data', data)
+      return data;
+    });
 }
 
 function getMovieTrailer(id) {
