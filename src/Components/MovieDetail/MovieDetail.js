@@ -20,50 +20,49 @@ function MovieDetails({
   const [trailer, setTrailer] = useState({});
   // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
   // const [error, setError] = useState({
-    //   hasError: false,
-    //   msg: '',
-    //   failedAt: '',
-    // });
-    const movieID = useParams().id
-    useEffect(() =>{
-console.log('useEffect is firing from the MovieDetails')  
+  //   hasError: false,
+  //   msg: '',
+  //   failedAt: '',
+  // });
+  const movieID = useParams().id;
+  useEffect(() => {
+    console.log('useEffect is firing from the MovieDetails');
 
- getMovieDetails(movieID)
+    getMovieDetails(movieID)
       .then((data) => {
-        console.log('individual movie data',data)
-       return setindividualMovie(data.movie)})
+        console.log('individual movie data', data);
+        return setindividualMovie(data.movie);
+      })
       .catch((error) => {
         // setError({
-          //   hasError: true,
-          //   msg: `${error}`,
-          //   failedAt: 'individualMovie',
-          // });
-          // setOnHomepage(false);
-        });
-        getMovieTrailer(id)
-        .then((data) => {
-          // setHasTrailer(true);
-          return setTrailer(data);
-        })
-        // .catch((error) => setHasTrailer(false));
-        // setOnWatchTrailer(false);
-      }, [])
-      let {
-        id,
-        poster_path,
-        backdrop_path,
-        title,
-        release_date,
-        overview,
-        genres,
-        budget,
-        revenue,
-        runtime,
-        average_rating,
-      } = individualMovie;
-      
-      
-      console.log('individualMovie',individualMovie)
+        //   hasError: true,
+        //   msg: `${error}`,
+        //   failedAt: 'individualMovie',
+        // });
+        // setOnHomepage(false);
+      });
+    getMovieTrailer(movieID).then((data) => {
+      console.log('trailer data', data);
+      return setTrailer(data);
+    });
+    // .catch((error) => setHasTrailer(false));
+    // setOnWatchTrailer(false);
+  }, []);
+  let {
+    id,
+    poster_path,
+    backdrop_path,
+    title,
+    release_date,
+    overview,
+    genres,
+    budget,
+    revenue,
+    runtime,
+    average_rating,
+  } = individualMovie;
+
+  console.log('individualMovie', individualMovie);
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
     let minutes = runtime % 60;
@@ -78,9 +77,7 @@ console.log('useEffect is firing from the MovieDetails')
     }
   };
 
-  console.log(' id', id)
-
-
+  console.log(' id', id);
 
   return (
     <section className='movieDetails'>
@@ -98,8 +95,8 @@ console.log('useEffect is firing from the MovieDetails')
           <h2 className='movieDetails__title'>{title}</h2>
           {hasTrailer && (
             <Link to={`/:${id}/trailer`}>
-              <button className='trailer-btn' >
-              {/* <button className='trailer-btn' onClick={() => displayTrailer()}> */}
+              <button className='trailer-btn'>
+                {/* <button className='trailer-btn' onClick={() => displayTrailer()}> */}
                 <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
                 Trailer
               </button>

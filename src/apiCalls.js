@@ -10,7 +10,7 @@ function getMovies() {
       if (resp.status === 404) {
         throw new Error('404: page not found');
       }
-      console.log(resp)
+      // console.log(resp)
       return resp.json();
     })
     // .then(data => {
@@ -25,12 +25,12 @@ function getMovieDetails(id) {
   )
     .then(resp => {
       
-      // if (resp.status >= 500 && !resp.status <= 599) {
-      //   throw new Error('Oops! Something went wrong, try again later.');
-      // }
-      // if (resp.status === 404) {
-      //   throw new Error('404: page not found');
-      // }
+      if (resp.status >= 500 && !resp.status <= 599) {
+        throw new Error('Oops! Something went wrong, try again later.');
+      }
+      if (resp.status === 404) {
+        throw new Error('404: page not found');
+      }
       console.log('single movie response', resp)
       return resp.json();
     })
@@ -42,16 +42,20 @@ function getMovieDetails(id) {
 }
 
 function getMovieTrailer(id) {
+  console.log('THE ID BEING PASSED INTO THE FETCH API', id)
   return fetch(
     `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}/videos`,
   )
-    .then(resp => resp.json())
+    .then(resp => {
+      console.log('TRAILER RESP',resp)
+      return resp.json()})
     .then(data => {
-      if (!data.videos.length) {
-        throw new Error('No trailer found.');
-      }
-      console.log(data)
-      return data.videos.find(video => video.type === 'Trailer');
+      console.log('trailer data',data)
+      // if (!data.videos.length) {
+      //   throw new Error('No trailer found.');
+      // }
+      return data.videos
+      // .find(video => video.type === 'Trailer');
     });
 }
 
