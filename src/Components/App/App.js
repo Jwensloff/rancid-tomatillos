@@ -76,7 +76,6 @@ function App() {
         )}
       {individualMovie && (
         <MovieDetails
-        setIsLoading={setIsLoading}
         displayTrailer={displayTrailer}
         individualMovie={individualMovie}
         backToHomePage={backToHomePage}
