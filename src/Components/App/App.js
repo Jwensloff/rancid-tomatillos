@@ -6,6 +6,7 @@ import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
+import Loading from '../Loading/Loading';
 
 function App() {
   const [onHomepage, setOnHomepage] = useState(true);
@@ -56,7 +57,7 @@ function App() {
 
   return (
     <div className='App'>
-
+      <Loading />
       {onWatchTrailer && (
         <Trailer
           backToHomePage={backToHomePage}
