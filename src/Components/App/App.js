@@ -9,17 +9,22 @@ import Trailer from '../Trailer/Trailer';
 import Loading from '../Loading/Loading';
 
 function App() {
-  const [onHomepage, setOnHomepage] = useState(true);
+  const [onHomepage, setOnHomepage] = useState(false);
   const [individualMovie, setindividualMovie] = useState(false);
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
   const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
   const [hasTrailer, setHasTrailer] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getMovies()
-      .then(data => setMovies(data))
+      .then(data => {
+        setIsLoading(false)
+        setOnHomepage(true)
+        return setMovies(data)
+      })
       .catch(error => {
         setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
         setOnHomepage(false)
@@ -27,9 +32,13 @@ function App() {
   }, []);
 
   const displayMovieDetails = id => {
+    setIsLoading(true)
     setOnHomepage(false);
     getMovies(id)
-      .then(data => setindividualMovie(data))
+      .then(data => {
+        setIsLoading(false)
+       return setindividualMovie(data)
+      })
       .catch(error => {
         setError({hasError: true, msg: `${error}`, failedAt: 'individualMovie'})
         setOnHomepage(false)
@@ -57,22 +66,23 @@ function App() {
 
   return (
     <div className='App'>
-      <Loading />
+
       {onWatchTrailer && (
         <Trailer
-          backToHomePage={backToHomePage}
-          trailer={trailer}
-          displayMovieDetails={displayMovieDetails}
+        backToHomePage={backToHomePage}
+        trailer={trailer}
+        displayMovieDetails={displayMovieDetails}
         />
-      )}
+        )}
       {individualMovie && (
         <MovieDetails
-          displayTrailer={displayTrailer}
-          individualMovie={individualMovie}
-          backToHomePage={backToHomePage}
-          hasTrailer={hasTrailer}
+        setIsLoading={setIsLoading}
+        displayTrailer={displayTrailer}
+        individualMovie={individualMovie}
+        backToHomePage={backToHomePage}
+        hasTrailer={hasTrailer}
         />
-      )}
+        )}
 
       {onHomepage && (
         <div className='page'>
@@ -80,9 +90,12 @@ function App() {
           <Homepage
             movies={movies}
             displayMovieDetails={displayMovieDetails}
-          />
+            />
         </div>
       )}
+
+      {isLoading && <Loading />}
+
       {error.hasError && <ErrorPage error={error} backToHomePage={backToHomePage}/>}
     </div>
   );
