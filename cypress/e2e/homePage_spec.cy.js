@@ -14,6 +14,4 @@ describe('homepage', () => {
     cy.get('.moviePoster').first().should('have.id', '436270')
     cy.get('.moviePoster').last().should('have.id', '505642')
   })
-
- 
 })
