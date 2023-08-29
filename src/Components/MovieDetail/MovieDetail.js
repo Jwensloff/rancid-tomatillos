@@ -54,8 +54,8 @@ function MovieDetails({ individualMovie, backToHomePage, displayTrailer , hasTra
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
           <p className='movieDetails__text'>{convertMovieDuration(runtime)}</p>
-          <p className='movieDetails__text'>{genres.join(', ')}</p>
-          <p className='movieDetails__text'>{release_date.slice(0, 4)}</p>
+          {/* <p className='movieDetails__text'>{genres.join(', ')}</p> */}
+          {/* <p className='movieDetails__text'>{release_date.slice(0, 4)}</p> */}
           <p className='movieDetails__text'>
             Budget: {convertDollarAmount(budget)}
           </p>

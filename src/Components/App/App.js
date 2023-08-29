@@ -72,14 +72,14 @@ function App() {
           displayMovieDetails={displayMovieDetails}
         />
       )}
-      {individualMovie && (
+      {/* {individualMovie && (
         <MovieDetails
           displayTrailer={displayTrailer}
           individualMovie={individualMovie}
           backToHomePage={backToHomePage}
           hasTrailer={hasTrailer}
         />
-      )}
+      )} */}
       <Routes>
         <Route
           path='/'
@@ -92,6 +92,17 @@ function App() {
                 displayMovieDetails={displayMovieDetails}
               />
             </>
+          }
+        />
+        <Route
+          path='/:id'
+          element={
+            <MovieDetails
+              displayTrailer={displayTrailer}
+              individualMovie={individualMovie}
+              backToHomePage={backToHomePage}
+              hasTrailer={hasTrailer}
+            />
           }
         />
       </Routes>
