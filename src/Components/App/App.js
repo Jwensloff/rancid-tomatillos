@@ -9,16 +9,18 @@ import Trailer from '../Trailer/Trailer';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [onHomepage, setOnHomepage] = useState(true);
+  // const [onHomepage, setOnHomepage] = useState(true);
   const [individualMovie, setIndividualMovie] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+  const [trailer, setTrailer] = useState({});
+  const [hasTrailer, setHasTrailer] = useState(true);
+  console.log('THIS IS THE TRAILER DATA FROM APP.JS', trailer)
+  // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     msg: '',
     failedAt: '',
   });
-  const [hasTrailer, setHasTrailer] = useState(true);
 
   // console.log('movies before', movies);
 
@@ -37,7 +39,7 @@ function App() {
   // console.log('movies after', movies);
 
   // const displayMovieDetails = (id) => {
-  //   setOnHomepage(false);
+  //   // setOnHomepage(false);
   //   getMovies(id)
   //     .then((data) => setindividualMovie(data))
   //     .catch((error) => {
@@ -46,15 +48,15 @@ function App() {
   //         msg: `${error}`,
   //         failedAt: 'individualMovie',
   //       });
-  //       setOnHomepage(false);
+  //       // setOnHomepage(false);
   //     });
   //   getMovieTrailer(id)
   //     .then((data) => {
-  //       setHasTrailer(true);
+  //       // setHasTrailer(true);
   //       return setTrailer(data);
   //     })
   //     .catch((error) => setHasTrailer(false));
-  //   setOnWatchTrailer(false);
+  //   // setOnWatchTrailer(false);
   // };
 
   // const backToHomePage = () => {
@@ -105,14 +107,14 @@ function App() {
             <MovieDetails
               individualMovie={individualMovie}
               setIndividualMovie={setIndividualMovie}
-              // setTrailer={setTrailer}
+              setTrailer={setTrailer}
               // displayTrailer={displayTrailer}
               // backToHomePage={backToHomePage}
               hasTrailer={hasTrailer}
             />
           }
         />
-        <Route path='/:id/:trailer' element={<Trailer />}/>
+        <Route path='/:id/:trailer' element={<Trailer trailer={trailer}/>}/>
       </Routes>
       {/* {onHomepage && (
         <div className='page'>

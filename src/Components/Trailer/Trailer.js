@@ -6,21 +6,30 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getMovieTrailer } from '../../apiCalls';
 
-function Trailer() {
-  // console.log("THIS IS THE TRAILER DATA",trailer)
+function Trailer({trailer}) {
+  const {key, movie_id} = trailer
+  console.log("THIS IS THE key DATA from the trailer.js --->", key)
+  // const [trailer, setTrailer] = useState({});
   
-  const [trailer, setTrailer] = useState({});
-  
-  const id = useParams().id;
-  
-  useEffect(() => {
-    getMovieTrailer(id).then((data) => {
-      console.log('trailer data', data);
-      return setTrailer(data.videos);
-    })
-  })
-  
-  const { key, movie_id } = trailer;
+    const id = useParams().id
+  //   // console.log('this is the useParams id',useParams().id)
+  //   // console.log('id',id)
+    
+  //   useEffect(() => {
+  //    async function fetchTrailer() {
+
+  //     getMovieTrailer(id)
+  //     .then((data) => {
+        
+  //     console.log('trailer data', data);
+  //     setTrailer(data);
+
+  //     // console.log('trailer data------->>>>>>>>',trailer)
+  //     // return { key, movie_id } = trailer
+  //   })
+  // }, [])
+
+
 
   return (
     <div className='trailer-page'>

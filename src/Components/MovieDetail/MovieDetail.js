@@ -1,10 +1,12 @@
 import './MovieDetail.scss';
-import PropTypes, { array, arrayOf } from 'prop-types';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+
+import PropTypes, { array, arrayOf } from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
-import { getMovies, getMovieTrailer, getMovieDetails } from '../../apiCalls';
+import { getMovieTrailer, getMovieDetails } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
 function MovieDetails({
@@ -14,42 +16,49 @@ function MovieDetails({
   // backToHomePage,
   // displayTrailer,
   // getMovieDetails,
-  hasTrailer,
+  setHasTrailer,
+  hasTrailer
 }) {
-  // const [individualMovie, setindividualMovie] = useState({});
   // const [onHomepage, setOnHomepage] = useState(true);
   // const [movies, setMovies] = useState([]);
   // const [trailer, setTrailer] = useState({});
   // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+  // const [individualMovie, setindividualMovie] = useState({});
+
   const [error, setError] = useState({
     hasError: false,
     msg: '',
     failedAt: '',
   });
+
   const id = useParams().id;
+  console.log('THIS IS THE ID FROM MOVIEDETAILS', id);
 
   useEffect(() => {
     // console.log('useEffect is firing from the MovieDetails');
 
     getMovieDetails(id)
-      .then((data) => {
-        // console.log('individual movie data', data);
-        return setIndividualMovie(data.movie);
-      })
+      .then((data) => setIndividualMovie(data.movie))
       .catch((error) => {
         setError({
           hasError: true,
           msg: `${error}`,
-          failedAt: 'individualMovie',
+          failedAt: 'indvidualMovie',
         });
+
+
         // setOnHomepage(false);
-      
-    // getMovieTrailer(id).then((data) => {
-    //   console.log('trailer data', data);
-    //   return setTrailer(data.videos);
+
+        // getMovieTrailer(id).then((data) => {
+        //   console.log('trailer data', data);
+        //   return setTrailer(data.videos);
+      });
+      getMovieTrailer(id)
+      .then(data => setTrailer(data))
+      .catch((error) => {
+      setHasTrailer(false)
+      // setOnWatchTrailer(false);
     });
-    // .catch((error) => setHasTrailer(false));
-    // setOnWatchTrailer(false);
   }, []);
 
   let {
@@ -67,7 +76,7 @@ function MovieDetails({
   } = individualMovie;
 
   console.log('individualMovie', individualMovie);
-  
+
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
     let minutes = runtime % 60;
@@ -84,6 +93,8 @@ function MovieDetails({
 
   console.log(' id', id);
 
+  // const formatGenres = movieGenres => movieGenres.join(', ')
+
   return (
     <section className='movieDetails'>
       <img className='movieDetails__img' src={backdrop_path} />
@@ -99,7 +110,7 @@ function MovieDetails({
         <div className='title-wrapper'>
           <h2 className='movieDetails__title'>{title}</h2>
           {hasTrailer && (
-            <Link to={`/:${id}/trailer`}>
+            <Link to={`/${id}/trailer`}>
               <button className='trailer-btn'>
                 {/* <button className='trailer-btn' onClick={() => displayTrailer()}> */}
                 <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
@@ -111,8 +122,11 @@ function MovieDetails({
         <div className='movie-details-sub'>
           <p className='movieDetails__text'>{average_rating} / 10</p>
           <p className='movieDetails__text'>{convertMovieDuration(runtime)}</p>
-          {/* <p className='movieDetails__text'>{genres.join(', ')}</p> */}
-          {/* <p className='movieDetails__text'>{release_date.slice(0, 4)}</p> */}
+          <p className='movieDetails__text'>{genres?.join(', ')}</p>
+          {/* <p className='movieDetails__text'>{formatGenres(genres)}</p> */}
+
+          <p className='movieDetails__text'>{release_date?.slice(0, 4)}</p>
+          {/* <p className='movieDetails__text'>{release_date}</p> */}
           <p className='movieDetails__text'>
             Budget: {convertDollarAmount(budget)}
           </p>
