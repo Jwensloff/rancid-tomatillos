@@ -9,34 +9,14 @@ import { Link, useParams } from 'react-router-dom';
 import { getMovieTrailer, getMovieDetails } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
-function MovieDetails({
-  individualMovie,
-  setIndividualMovie,
-  setTrailer,
-  // backToHomePage,
-  // displayTrailer,
-  // getMovieDetails,
-  setHasTrailer,
-  hasTrailer
-}) {
-  // const [onHomepage, setOnHomepage] = useState(true);
-  // const [movies, setMovies] = useState([]);
-  // const [trailer, setTrailer] = useState({});
-  // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
-  // const [individualMovie, setindividualMovie] = useState({});
+function MovieDetails({ setTrailer, setError }) {
+  const [hasTrailer, setHasTrailer] = useState(true);
 
-  const [error, setError] = useState({
-    hasError: false,
-    msg: '',
-    failedAt: '',
-  });
+  const [individualMovie, setIndividualMovie] = useState({});
 
   const id = useParams().id;
-  console.log('THIS IS THE ID FROM MOVIEDETAILS', id);
 
   useEffect(() => {
-    // console.log('useEffect is firing from the MovieDetails');
-
     getMovieDetails(id)
       .then((data) => setIndividualMovie(data.movie))
       .catch((error) => {
@@ -45,25 +25,15 @@ function MovieDetails({
           msg: `${error}`,
           failedAt: 'indvidualMovie',
         });
-
-
-        // setOnHomepage(false);
-
-        // getMovieTrailer(id).then((data) => {
-        //   console.log('trailer data', data);
-        //   return setTrailer(data.videos);
       });
-      getMovieTrailer(id)
-      .then(data => setTrailer(data))
+    getMovieTrailer(id)
+      .then((data) => setTrailer(data))
       .catch((error) => {
-      setHasTrailer(false)
-      // setOnWatchTrailer(false);
-    });
+        setHasTrailer(false);
+      });
   }, []);
 
   let {
-    // id,
-    poster_path,
     backdrop_path,
     title,
     release_date,
@@ -74,8 +44,6 @@ function MovieDetails({
     runtime,
     average_rating,
   } = individualMovie;
-
-  console.log('individualMovie', individualMovie);
 
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
@@ -91,20 +59,11 @@ function MovieDetails({
     }
   };
 
-  console.log(' id', id);
-
-  // const formatGenres = movieGenres => movieGenres.join(', ')
-
   return (
     <section className='movieDetails'>
       <img className='movieDetails__img' src={backdrop_path} />
       <Link className='button' to='/'>
-        <FontAwesomeIcon
-          // onClick={() => backToHomePage()}
-          icon={faXmark}
-          color='white'
-          size='2x'
-        />
+        <FontAwesomeIcon icon={faXmark} color='white' size='2x' />
       </Link>
       <section className='movieDetails__block'>
         <div className='title-wrapper'>
@@ -112,7 +71,6 @@ function MovieDetails({
           {hasTrailer && (
             <Link to={`/${id}/trailer`}>
               <button className='trailer-btn'>
-                {/* <button className='trailer-btn' onClick={() => displayTrailer()}> */}
                 <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
                 Trailer
               </button>
@@ -123,10 +81,7 @@ function MovieDetails({
           <p className='movieDetails__text'>{average_rating} / 10</p>
           <p className='movieDetails__text'>{convertMovieDuration(runtime)}</p>
           <p className='movieDetails__text'>{genres?.join(', ')}</p>
-          {/* <p className='movieDetails__text'>{formatGenres(genres)}</p> */}
-
           <p className='movieDetails__text'>{release_date?.slice(0, 4)}</p>
-          {/* <p className='movieDetails__text'>{release_date}</p> */}
           <p className='movieDetails__text'>
             Budget: {convertDollarAmount(budget)}
           </p>
@@ -143,17 +98,6 @@ function MovieDetails({
 export default MovieDetails;
 
 MovieDetails.propTypes = {
-  individualMovie: PropTypes.shape({
-    backdrop_path: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    tagline: PropTypes.string,
-    overview: PropTypes.string.isRequired,
-    average_rating: PropTypes.number,
-    release_date: PropTypes.string,
-    budget: PropTypes.number,
-    revenue: PropTypes.number,
-    runtime: PropTypes.number,
-    genres: arrayOf(PropTypes.string),
-  }).isRequired,
-  backToHomePage: PropTypes.func.isRequired,
+  setTrailer: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
 };

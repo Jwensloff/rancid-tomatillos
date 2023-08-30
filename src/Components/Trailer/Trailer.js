@@ -8,12 +8,9 @@ import { getMovieTrailer } from '../../apiCalls';
 
 function Trailer({trailer}) {
   const {key, movie_id} = trailer
-  console.log("THIS IS THE key DATA from the trailer.js --->", key)
   // const [trailer, setTrailer] = useState({});
   
     const id = useParams().id
-  //   // console.log('this is the useParams id',useParams().id)
-  //   // console.log('id',id)
     
   //   useEffect(() => {
   //    async function fetchTrailer() {
@@ -21,10 +18,8 @@ function Trailer({trailer}) {
   //     getMovieTrailer(id)
   //     .then((data) => {
         
-  //     console.log('trailer data', data);
   //     setTrailer(data);
 
-  //     // console.log('trailer data------->>>>>>>>',trailer)
   //     // return { key, movie_id } = trailer
   //   })
   // }, [])
