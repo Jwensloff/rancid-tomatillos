@@ -10,10 +10,9 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [onHomepage, setOnHomepage] = useState(true);
-  // const [individualMovie, setindividualMovie] = useState(false);
+  const [individualMovie, setIndividualMovie] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [trailer, setTrailer] = useState({});
-  // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+  const [onWatchTrailer, setOnWatchTrailer] = useState(false);
   const [error, setError] = useState({
     hasError: false,
     msg: '',
@@ -58,17 +57,17 @@ function App() {
   //   setOnWatchTrailer(false);
   // };
 
-  const backToHomePage = () => {
-    // setindividualMovie(false);
-    // setOnHomepage(true);
-    // setOnWatchTrailer(false);
-    setError({ hasError: false, msg: '', failedAt: '' });
-  };
+  // const backToHomePage = () => {
+  //   // setindividualMovie(false);
+  //   // setOnHomepage(true);
+  //   // setOnWatchTrailer(false);
+  //   setError({ hasError: false, msg: '', failedAt: '' });
+  // };
 
-  const displayTrailer = () => {
-    // setOnWatchTrailer(true);
-    // setindividualMovie(false);
-  };
+  // const displayTrailer = () => {
+  //   // setOnWatchTrailer(true);
+  //   // setindividualMovie(false);
+  // };
 
   return (
     <div className='App'>
@@ -104,14 +103,16 @@ function App() {
           path='/:id'
           element={
             <MovieDetails
-              // individualMovie={individualMovie}
+              individualMovie={individualMovie}
+              setIndividualMovie={setIndividualMovie}
+              // setTrailer={setTrailer}
               // displayTrailer={displayTrailer}
               // backToHomePage={backToHomePage}
               hasTrailer={hasTrailer}
             />
           }
         />
-        {/* <Route path='/:id/:trailer' element={<Trailer/>}/> */}
+        <Route path='/:id/:trailer' element={<Trailer />}/>
       </Routes>
       {/* {onHomepage && (
         <div className='page'>
@@ -119,9 +120,9 @@ function App() {
           <Homepage movies={movies} displayMovieDetails={displayMovieDetails} />
         </div>
       )} */}
-      {/* {error.hasError && (
-        <ErrorPage error={error} backToHomePage={backToHomePage} />
-      )} */}
+      {error.hasError && (
+        <ErrorPage error={error}  />
+      )}
     </div>
   );
 }

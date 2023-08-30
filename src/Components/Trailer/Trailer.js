@@ -2,15 +2,30 @@ import './Trailer.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getMovieTrailer } from '../../apiCalls';
 
-function Trailer({ trailer, displayMovieDetails, backToHomePage }) {
+function Trailer() {
+  // console.log("THIS IS THE TRAILER DATA",trailer)
+  
+  const [trailer, setTrailer] = useState({});
+  
+  const id = useParams().id;
+  
+  useEffect(() => {
+    getMovieTrailer(id).then((data) => {
+      console.log('trailer data', data);
+      return setTrailer(data.videos);
+    })
+  })
+  
   const { key, movie_id } = trailer;
 
   return (
     <div className='trailer-page'>
       <div className='button-wrapper'>
-        <Link to={`/${movie_id}`}>
+        <Link to={`/${id}`}>
           <button
             className='back-to-movie-details-button'
             // onClick={() => displayMovieDetails(movie_id)}

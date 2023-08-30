@@ -8,48 +8,52 @@ import { getMovies, getMovieTrailer, getMovieDetails } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 
 function MovieDetails({
-  // individualMovie,
+  individualMovie,
+  setIndividualMovie,
+  setTrailer,
   // backToHomePage,
   // displayTrailer,
   // getMovieDetails,
   hasTrailer,
 }) {
-  const [individualMovie, setindividualMovie] = useState(false);
+  // const [individualMovie, setindividualMovie] = useState({});
   // const [onHomepage, setOnHomepage] = useState(true);
   // const [movies, setMovies] = useState([]);
-  const [trailer, setTrailer] = useState({});
+  // const [trailer, setTrailer] = useState({});
   // const [onWatchTrailer, setOnWatchTrailer] = useState(false);
-  // const [error, setError] = useState({
-  //   hasError: false,
-  //   msg: '',
-  //   failedAt: '',
-  // });
-  const movieID = useParams().id;
-  useEffect(() => {
-    console.log('useEffect is firing from the MovieDetails');
+  const [error, setError] = useState({
+    hasError: false,
+    msg: '',
+    failedAt: '',
+  });
+  const id = useParams().id;
 
-    getMovieDetails(movieID)
+  useEffect(() => {
+    // console.log('useEffect is firing from the MovieDetails');
+
+    getMovieDetails(id)
       .then((data) => {
-        console.log('individual movie data', data);
-        return setindividualMovie(data.movie);
+        // console.log('individual movie data', data);
+        return setIndividualMovie(data.movie);
       })
       .catch((error) => {
-        // setError({
-        //   hasError: true,
-        //   msg: `${error}`,
-        //   failedAt: 'individualMovie',
-        // });
+        setError({
+          hasError: true,
+          msg: `${error}`,
+          failedAt: 'individualMovie',
+        });
         // setOnHomepage(false);
-      });
-    getMovieTrailer(movieID).then((data) => {
-      console.log('trailer data', data);
-      return setTrailer(data);
+      
+    // getMovieTrailer(id).then((data) => {
+    //   console.log('trailer data', data);
+    //   return setTrailer(data.videos);
     });
     // .catch((error) => setHasTrailer(false));
     // setOnWatchTrailer(false);
   }, []);
+
   let {
-    id,
+    // id,
     poster_path,
     backdrop_path,
     title,
@@ -63,6 +67,7 @@ function MovieDetails({
   } = individualMovie;
 
   console.log('individualMovie', individualMovie);
+  
   const convertMovieDuration = (runtime) => {
     let hours = Math.floor(runtime / 60);
     let minutes = runtime % 60;
