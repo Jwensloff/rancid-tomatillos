@@ -6,83 +6,47 @@ import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-  const [onHomepage, setOnHomepage] = useState(true);
-  const [individualMovie, setindividualMovie] = useState(false);
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
-  const [onWatchTrailer, setOnWatchTrailer] = useState(false);
-  const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
-  const [hasTrailer, setHasTrailer] = useState(true);
+
+  const [error, setError] = useState({
+    hasError: false,
+    msg: '',
+    failedAt: '',
+  });
 
   useEffect(() => {
     getMovies()
-      .then(data => setMovies(data))
-      .catch(error => {
-        setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
-        setOnHomepage(false)
+      .then((data) => {
+        return setMovies(data.movies);
+      })
+      .catch((error) => {
+        setError({ hasError: true, msg: `${error}`, failedAt: 'homePage' });
       });
   }, []);
 
-  const displayMovieDetails = id => {
-    setOnHomepage(false);
-    getMovies(id)
-      .then(data => setindividualMovie(data))
-      .catch(error => {
-        setError({hasError: true, msg: `${error}`, failedAt: 'individualMovie'})
-        setOnHomepage(false)
-      });
-    getMovieTrailer(id)
-      .then(data => {
-        setHasTrailer(true)
-        return setTrailer(data);
-      })
-      .catch(error => setHasTrailer(false));
-    setOnWatchTrailer(false);
-  };
-
-  const backToHomePage = () => {
-    setindividualMovie(false);
-    setOnHomepage(true);
-    setOnWatchTrailer(false);
-    setError({hasError: false, msg: '', failedAt: ''})
-  };
-
-  const displayTrailer = () => {
-    setOnWatchTrailer(true);
-    setindividualMovie(false);
-  };
-
   return (
     <div className='App'>
-
-      {onWatchTrailer && (
-        <Trailer
-          backToHomePage={backToHomePage}
-          trailer={trailer}
-          displayMovieDetails={displayMovieDetails}
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <>
+              <Header />
+              <Homepage movies={movies} />
+            </>
+          }
         />
-      )}
-      {individualMovie && (
-        <MovieDetails
-          displayTrailer={displayTrailer}
-          individualMovie={individualMovie}
-          backToHomePage={backToHomePage}
-          hasTrailer={hasTrailer}
+        <Route
+          path='/:id'
+          element={<MovieDetails setTrailer={setTrailer} setError={setError} />}
         />
-      )}
-
-      {onHomepage && (
-        <div className='page'>
-          <Header />
-          <Homepage
-            movies={movies}
-            displayMovieDetails={displayMovieDetails}
-          />
-        </div>
-      )}
-      {error.hasError && <ErrorPage error={error} backToHomePage={backToHomePage}/>}
+        <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+      </Routes>
+      {error.hasError && <ErrorPage error={error} />}
     </div>
   );
 }
