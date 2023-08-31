@@ -14,7 +14,7 @@ function getMovies() {
 
 function getMovieDetails(id) {
   return fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
+    `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${3}`
   ).then((resp) => {
     if (resp.status >= 500 && !resp.status <= 599) {
       throw new Error('Oops! Something went wrong, try again later.');

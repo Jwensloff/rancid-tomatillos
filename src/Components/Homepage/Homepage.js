@@ -2,9 +2,10 @@ import './Homepage.scss';
 import MoviePoster from '../MoviePoster/MoviePoster';
 import { arrayOf } from 'prop-types';
 import PropTypes from 'prop-types';
+import ErrorPage from '../ErrorPage/ErrorPage';
 
-function Homepage({ movies }) {
-  const movieCards = movies.map(movie => (
+function Homepage({ movies, error }) {
+  const movieCards = movies.map((movie) => (
     <MoviePoster
       key={movie.id}
       id={movie.id}
@@ -13,7 +14,12 @@ function Homepage({ movies }) {
     />
   ));
 
-  return <div className='moviesContainer'>{movieCards}</div>;
+  return (
+    <div className='moviesContainer'>
+      {movieCards}
+      {error.hasError && <ErrorPage error={error} />}
+    </div>
+  );
 }
 
 export default Homepage;

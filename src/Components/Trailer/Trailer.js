@@ -8,21 +8,9 @@ import { getMovieTrailer } from '../../apiCalls';
 
 function Trailer({trailer}) {
   const {key, movie_id} = trailer
-  // const [trailer, setTrailer] = useState({});
   
     const id = useParams().id
-    
-  //   useEffect(() => {
-  //    async function fetchTrailer() {
-
-  //     getMovieTrailer(id)
-  //     .then((data) => {
-        
-  //     setTrailer(data);
-
-  //     // return { key, movie_id } = trailer
-  //   })
-  // }, [])
+  
 
 
 
@@ -32,7 +20,6 @@ function Trailer({trailer}) {
         <Link to={`/${id}`}>
           <button
             className='back-to-movie-details-button'
-            // onClick={() => displayMovieDetails(movie_id)}
           >
             <FontAwesomeIcon icon={faCircleArrowLeft} />
           </button>
@@ -40,7 +27,6 @@ function Trailer({trailer}) {
         <Link to='/'>
           <button
             className='back-to-home-button'
-            // onClick={() => backToHomePage()}
           >
             <FontAwesomeIcon icon={faHouse} />
           </button>
