@@ -33,9 +33,7 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
           msg: `${error}`,
           failedAt: 'indvidualMovie',
         })
-        console.log('we are in the catch block-->', error)
         if(error == 'Error: 404'){
-          console.log('we are in the 404 bb!!-->', error)
           navigate('/error404')
         } else {
         navigate('/error')

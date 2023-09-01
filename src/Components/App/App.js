@@ -26,7 +26,6 @@ function App() {
         return setMovies(data.movies);
       })
       .catch((error) => {
-        console.log('this is the error -->', error);
          setError({
           hasError: true,
           msg: `${error}`,
@@ -35,7 +34,6 @@ function App() {
         
 
         if(error == 'Error: 404'){
-          console.log('we are in the 404 bb!!-->', error)
           navigate('/error404')
         } else {
         navigate('/error')

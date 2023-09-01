@@ -5,7 +5,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 function ErrorPage({ error }) {
-  console.log(error);
   return (
     <section className='error-page-wrapper'>
       {error.failedAt === 'indvidualMovie' && (

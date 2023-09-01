@@ -6,7 +6,6 @@ import img from './Error404Img.jpeg';
 
 function ErrorPage404( { error } ) {
 
-  console.log('error------->', error)
   return (
     <div className='img-wrapper'>
       <img className='img' src={img} alt={'404 error, page not found'} />
