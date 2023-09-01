@@ -17,19 +17,39 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
   const id = useParams().id;
   const navigate = useNavigate();
 
-
   useEffect(() => {
     getMovieDetails(id)
-      .then((data) => setIndividualMovie(data.movie))
+      .then((data) => {
+        setError({
+          hasError: false,
+          msg: ``,
+          failedAt: '',
+        });
+        return setIndividualMovie(data.movie);
+      })
       .catch((error) => {
         setError({
           hasError: true,
           msg: `${error}`,
           failedAt: 'indvidualMovie',
-        });
+        })
+        console.log('we are in the catch block-->', error)
+        if(error == 'Error: 404'){
+          console.log('we are in the 404 bb!!-->', error)
+          navigate('/error404')
+        } else {
+        navigate('/error')
+      }
       });
     getMovieTrailer(id)
-      .then((data) => setTrailer(data))
+      .then((data) => {
+        setError({
+          hasError: false,
+          msg: ``,
+          failedAt: '',
+        })
+       return setTrailer(data)
+      })
       .catch((error) => {
         setHasTrailer(false);
       });
@@ -66,41 +86,45 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
       {error.hasError ? (
         <ErrorPage error={error} />
       ) : (
-      <section className='movieDetails'>
-        <img className='movieDetails__img' src={backdrop_path} />
-        <Link className='button' to='/'>
-          <FontAwesomeIcon icon={faXmark} color='white' size='2x' />
-        </Link>
-        <section className='movieDetails__block'>
-          <div className='title-wrapper'>
-            <h2 className='movieDetails__title'>{title}</h2>
-            {hasTrailer && (
-              <Link to={`/${id}/trailer`}>
-                <button className='trailer-btn'>
-                  <FontAwesomeIcon icon={faYoutube} color='#ff0000' size='lg' />{' '}
-                  Trailer
-                </button>
-              </Link>
-            )}
-          </div>
-          <div className='movie-details-sub'>
-            <p className='movieDetails__text'>{average_rating} / 10</p>
-            <p className='movieDetails__text'>
-              {convertMovieDuration(runtime)}
-            </p>
-            <p className='movieDetails__text'>{genres?.join(', ')}</p>
-            <p className='movieDetails__text'>{release_date?.slice(0, 4)}</p>
-            <p className='movieDetails__text'>
-              Budget: {convertDollarAmount(budget)}
-            </p>
-            <p className='movieDetails__text'>
-              Revenue: {convertDollarAmount(revenue)}
-            </p>
-          </div>
-          <p className='movieDetails__text overview'>{overview}</p>
+        <section className='movieDetails'>
+          <img className='movieDetails__img' src={backdrop_path} />
+          <Link className='button' to='/'>
+            <FontAwesomeIcon icon={faXmark} color='white' size='2x' />
+          </Link>
+          <section className='movieDetails__block'>
+            <div className='title-wrapper'>
+              <h2 className='movieDetails__title'>{title}</h2>
+              {hasTrailer && (
+                <Link to={`/${id}/trailer`}>
+                  <button className='trailer-btn'>
+                    <FontAwesomeIcon
+                      icon={faYoutube}
+                      color='#ff0000'
+                      size='lg'
+                    />{' '}
+                    Trailer
+                  </button>
+                </Link>
+              )}
+            </div>
+            <div className='movie-details-sub'>
+              <p className='movieDetails__text'>{average_rating} / 10</p>
+              <p className='movieDetails__text'>
+                {convertMovieDuration(runtime)}
+              </p>
+              <p className='movieDetails__text'>{genres?.join(', ')}</p>
+              <p className='movieDetails__text'>{release_date?.slice(0, 4)}</p>
+              <p className='movieDetails__text'>
+                Budget: {convertDollarAmount(budget)}
+              </p>
+              <p className='movieDetails__text'>
+                Revenue: {convertDollarAmount(revenue)}
+              </p>
+            </div>
+            <p className='movieDetails__text overview'>{overview}</p>
+          </section>
         </section>
-      </section>
-       )} 
+      )}
     </>
   );
 }
