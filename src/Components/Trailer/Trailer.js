@@ -14,6 +14,7 @@ function Trailer({trailer}) {
 
 
 
+
   return (
     <div className='trailer-page'>
       <div className='button-wrapper'>

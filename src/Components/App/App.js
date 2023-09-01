@@ -6,11 +6,43 @@ import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
+import Loading from '../Loading/Loading';
+
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ErrorPage404 from '../ErrorPage404/ErrorPage404';
+
+// import { Routes, Route, useNavigate } from 'react-router-dom';
+// import ErrorPage404 from '../ErrorPage404/ErrorPage404';
+
+// function App() {
+//   const [onHomepage, setOnHomepage] = useState(false);
+//   const [individualMovie, setindividualMovie] = useState(false);
+//   const [movies, setMovies] = useState([]);
+//   const [trailer, setTrailer] = useState({});
+//   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+//   const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
+//   const [hasTrailer, setHasTrailer] = useState(true);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   useEffect(() => {
+//     getMovies()
+//       .then(data => {
+//         setIsLoading(false)
+//         setOnHomepage(true)
+//         return setMovies(data)
+//       })
+//       .catch(error => {
+//         setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
+//         setOnHomepage(false)
+//       });
+//   }, []);
+
+//   const displayMovieDetails = id => {
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState({
     hasError: false,
@@ -23,9 +55,11 @@ function App() {
   useEffect(() => {
     getMovies()
       .then((data) => {
+        setLoading(false)
         return setMovies(data.movies);
       })
       .catch((error) => {
+        setLoading(false)
          setError({
           hasError: true,
           msg: `${error}`,
@@ -42,6 +76,7 @@ function App() {
 
   return (
     <div className='App'>
+      
       <Routes>
           <Route path='/error404' element={<ErrorPage404 error={error} />} />
           <Route path='/error' element={<ErrorPage error={error} />} />
@@ -50,6 +85,7 @@ function App() {
           element={
             <>
               <Header />
+              {loading && <Loading />}
               <Homepage movies={movies} error={error} />
             </>
           }
@@ -61,10 +97,12 @@ function App() {
               setTrailer={setTrailer}
               setError={setError}
               error={error}
+              setLoading={setLoading}
+              loading={loading}
             />
           }
         />
-        <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+        <Route path='/:id/:trailer' element={<Trailer trailer={trailer}/>} />
         <Route path='*' element={<ErrorPage404 error={error}/>} />
         {/* <Route path='/error' element={<ErrorPage404 />} /> */}
       </Routes>
