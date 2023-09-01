@@ -4,7 +4,7 @@ import { arrayOf } from 'prop-types';
 import PropTypes from 'prop-types';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
-function Homepage({ movies, error }) {
+function Homepage({ movies, error}) {
   
   const movieCards = movies.map((movie) => (
     <MoviePoster

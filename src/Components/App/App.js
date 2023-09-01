@@ -14,6 +14,7 @@ import Search from '../Search/Search';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([])
   const [trailer, setTrailer] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +30,8 @@ function App() {
     getMovies()
       .then((data) => {
         setLoading(false)
-        return setMovies(data.movies);
+        setMovies(data.movies);
+        setFilteredMovies(data.movies);
       })
       .catch((error) => {
         setLoading(false)
@@ -46,6 +48,10 @@ function App() {
       }});
   }, []);
 
+  const filterMovies = (searchInput) => {
+    setFilteredMovies(movies.filter( movie => movie.title.includes(searchInput)))
+  }
+
   return (
     <div className='App'>
       
@@ -58,8 +64,8 @@ function App() {
             <>
               <Header />
               {loading && <Loading />}
-              <Search/>
-              <Homepage movies={movies} error={error} />
+              <Search filterMovies={filterMovies}/>
+              <Homepage movies={filteredMovies} error={error} />
             </>
           }
         />
