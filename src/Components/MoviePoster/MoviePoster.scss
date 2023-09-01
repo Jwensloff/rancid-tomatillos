@@ -7,3 +7,10 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 612px) {
+  .moviePoster{
+    max-width: 50vw ;
+    height: auto;
+  }
+}

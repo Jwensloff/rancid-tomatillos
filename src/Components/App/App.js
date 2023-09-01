@@ -8,6 +8,8 @@ import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
 import Loading from '../Loading/Loading';
 
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 function App() {
   const [onHomepage, setOnHomepage] = useState(false);
   const [individualMovie, setindividualMovie] = useState(false);
@@ -32,70 +34,69 @@ function App() {
   }, []);
 
   const displayMovieDetails = id => {
-    setIsLoading(true)
-    setOnHomepage(false);
-    getMovies(id)
-      .then(data => {
-        setIsLoading(false)
-       return setindividualMovie(data)
-      })
-      .catch(error => {
-        setError({hasError: true, msg: `${error}`, failedAt: 'individualMovie'})
-        setOnHomepage(false)
-      });
-    getMovieTrailer(id)
-      .then(data => {
-        setHasTrailer(true)
-        return setTrailer(data);
-      })
-      .catch(error => setHasTrailer(false));
-    setOnWatchTrailer(false);
-  };
 
-  const backToHomePage = () => {
-    setindividualMovie(false);
-    setOnHomepage(true);
-    setOnWatchTrailer(false);
-    setError({hasError: false, msg: '', failedAt: ''})
-  };
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import ErrorPage404 from '../ErrorPage404/ErrorPage404';
+function App() {
+  const [movies, setMovies] = useState([]);
+  const [trailer, setTrailer] = useState({});
 
-  const displayTrailer = () => {
-    setOnWatchTrailer(true);
-    setindividualMovie(false);
-  };
+  const [error, setError] = useState({
+    hasError: false,
+    msg: '',
+    failedAt: '',
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getMovies()
+      .then((data) => {
+        return setMovies(data.movies);
+      })
+      .catch((error) => {
+         setError({
+          hasError: true,
+          msg: `${error}`,
+          failedAt: 'homePage',
+        });
+        
+
+        if(error == 'Error: 404'){
+          navigate('/error404')
+        } else {
+        navigate('/error')
+      }});
+  }, []);
 
   return (
     <div className='App'>
-
-      {onWatchTrailer && (
-        <Trailer
-        backToHomePage={backToHomePage}
-        trailer={trailer}
-        displayMovieDetails={displayMovieDetails}
+      <Routes>
+          <Route path='/error404' element={<ErrorPage404 error={error} />} />
+          <Route path='/error' element={<ErrorPage error={error} />} />
+        <Route
+          path='/'
+          element={
+            <>
+              <Header />
+              <Homepage movies={movies} error={error} />
+            </>
+          }
         />
-        )}
-      {individualMovie && (
-        <MovieDetails
-        displayTrailer={displayTrailer}
-        individualMovie={individualMovie}
-        backToHomePage={backToHomePage}
-        hasTrailer={hasTrailer}
-        />
-        )}
-
-      {onHomepage && (
-        <div className='page'>
-          <Header />
-          <Homepage
-            movies={movies}
-            displayMovieDetails={displayMovieDetails}
+        <Route
+          path='/:id'
+          element={
+            <MovieDetails
+              setTrailer={setTrailer}
+              setError={setError}
+              error={error}
             />
-        </div>
-      )}
-
-      {isLoading && <Loading />}
-
-      {error.hasError && <ErrorPage error={error} backToHomePage={backToHomePage}/>}
+          }
+        />
+        <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+        <Route path='*' element={<ErrorPage404 error={error}/>} />
+        {/* <Route path='/error' element={<ErrorPage404 />} /> */}
+      </Routes>
     </div>
   );
 }
