@@ -5,7 +5,7 @@ function getMovies() {
         throw new Error('Oops! Something went wrong, try again later.');
       }
       if (resp.status === 404) {
-        throw new Error('404: page not found');
+        throw new Error('404');
       }
       return resp.json();
     }
@@ -20,7 +20,7 @@ function getMovieDetails(id) {
       throw new Error('Oops! Something went wrong, try again later.');
     }
     if (resp.status === 404) {
-      throw new Error('404: page not found');
+      throw new Error('404');
     }
     return resp.json();
   });

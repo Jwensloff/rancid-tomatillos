@@ -6,6 +6,8 @@ describe('homepage', () => {
       fixture: 'mockMovies.json'
     })
     cy.visit('http://localhost:3000/')
+    cy.location().should((loc)=> {
+      expect(loc.pathname).to.eq('/')})
     })
   
   it('should see the title and a movie collection when visiting the website', () => {

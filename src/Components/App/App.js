@@ -6,8 +6,8 @@ import MovieDetails from '../MovieDetail/MovieDetail';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { getMovies, getMovieTrailer } from '../../apiCalls';
 import Trailer from '../Trailer/Trailer';
-import { Routes, Route } from 'react-router-dom';
-
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
@@ -18,35 +18,56 @@ function App() {
     failedAt: '',
   });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getMovies()
       .then((data) => {
         return setMovies(data.movies);
       })
       .catch((error) => {
-        setError({ hasError: true, msg: `${error}`, failedAt: 'homePage' });
-      });
+         setError({
+          hasError: true,
+          msg: `${error}`,
+          failedAt: 'homePage',
+        });
+        
+
+        if(error == 'Error: 404'){
+          navigate('/error404')
+        } else {
+        navigate('/error')
+      }});
   }, []);
 
   return (
     <div className='App'>
       <Routes>
+          <Route path='/error404' element={<ErrorPage404 error={error} />} />
+          <Route path='/error' element={<ErrorPage error={error} />} />
         <Route
           path='/'
           element={
             <>
               <Header />
-              <Homepage movies={movies} />
+              <Homepage movies={movies} error={error} />
             </>
           }
         />
         <Route
           path='/:id'
-          element={<MovieDetails setTrailer={setTrailer} setError={setError} />}
+          element={
+            <MovieDetails
+              setTrailer={setTrailer}
+              setError={setError}
+              error={error}
+            />
+          }
         />
         <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+        <Route path='*' element={<ErrorPage404 error={error}/>} />
+        {/* <Route path='/error' element={<ErrorPage404 />} /> */}
       </Routes>
-      {error.hasError && <ErrorPage error={error} />}
     </div>
   );
 }
