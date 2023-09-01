@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   const filterMovies = (searchInput) => {
-    setFilteredMovies(movies.filter( movie => movie.title.includes(searchInput)))
+    setFilteredMovies(movies.filter( movie => movie.title.toLowerCase().includes(searchInput.toLowerCase())))
   }
 
   return (
