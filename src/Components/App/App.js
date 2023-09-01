@@ -10,33 +10,35 @@ import Loading from '../Loading/Loading';
 
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ErrorPage404 from '../ErrorPage404/ErrorPage404';
-function App() {
-  const [onHomepage, setOnHomepage] = useState(false);
-  const [individualMovie, setindividualMovie] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [trailer, setTrailer] = useState({});
-  const [onWatchTrailer, setOnWatchTrailer] = useState(false);
-  const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
-  const [hasTrailer, setHasTrailer] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    getMovies()
-      .then(data => {
-        setIsLoading(false)
-        setOnHomepage(true)
-        return setMovies(data)
-      })
-      .catch(error => {
-        setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
-        setOnHomepage(false)
-      });
-  }, []);
+// import { Routes, Route, useNavigate } from 'react-router-dom';
+// import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 
-  const displayMovieDetails = id => {
+// function App() {
+//   const [onHomepage, setOnHomepage] = useState(false);
+//   const [individualMovie, setindividualMovie] = useState(false);
+//   const [movies, setMovies] = useState([]);
+//   const [trailer, setTrailer] = useState({});
+//   const [onWatchTrailer, setOnWatchTrailer] = useState(false);
+//   const [error, setError] = useState({hasError: false, msg: '', failedAt: ''});
+//   const [hasTrailer, setHasTrailer] = useState(true);
+//   const [isLoading, setIsLoading] = useState(true);
 
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import ErrorPage404 from '../ErrorPage404/ErrorPage404';
+//   useEffect(() => {
+//     getMovies()
+//       .then(data => {
+//         setIsLoading(false)
+//         setOnHomepage(true)
+//         return setMovies(data)
+//       })
+//       .catch(error => {
+//         setError({hasError: true, msg: `${error}`, failedAt: 'homePage'})
+//         setOnHomepage(false)
+//       });
+//   }, []);
+
+//   const displayMovieDetails = id => {
+
 function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
