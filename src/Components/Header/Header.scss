@@ -18,6 +18,14 @@ header{
 h1{
   font-family: 'showTime', sans-serif;
   font-size: 4rem;
-  color: gold;
-  
+  color: gold; 
+}
+
+@media screen and (max-width: 612px) {
+  header {
+    height: 5rem;
+  }
+  h1{
+    font-size: 1.5rem;
+  }
 }
