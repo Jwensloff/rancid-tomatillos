@@ -42,6 +42,7 @@ import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 function App() {
   const [movies, setMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState({
     hasError: false,
@@ -54,9 +55,11 @@ function App() {
   useEffect(() => {
     getMovies()
       .then((data) => {
+        setLoading(false)
         return setMovies(data.movies);
       })
       .catch((error) => {
+        setLoading(false)
          setError({
           hasError: true,
           msg: `${error}`,
@@ -73,6 +76,7 @@ function App() {
 
   return (
     <div className='App'>
+      
       <Routes>
           <Route path='/error404' element={<ErrorPage404 error={error} />} />
           <Route path='/error' element={<ErrorPage error={error} />} />
@@ -81,6 +85,7 @@ function App() {
           element={
             <>
               <Header />
+              {loading && <Loading />}
               <Homepage movies={movies} error={error} />
             </>
           }
@@ -92,10 +97,12 @@ function App() {
               setTrailer={setTrailer}
               setError={setError}
               error={error}
+              setLoading={setLoading}
+              loading={loading}
             />
           }
         />
-        <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+        <Route path='/:id/:trailer' element={<Trailer trailer={trailer}/>} />
         <Route path='*' element={<ErrorPage404 error={error}/>} />
         {/* <Route path='/error' element={<ErrorPage404 />} /> */}
       </Routes>

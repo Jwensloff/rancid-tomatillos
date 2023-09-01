@@ -9,7 +9,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getMovieTrailer, getMovieDetails } from '../../apiCalls';
 import { useEffect, useState } from 'react';
 import ErrorPage from '../ErrorPage/ErrorPage';
-function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
+import Loading from '../Loading/Loading';
+
+function MovieDetails({ setTrailer, setError, error, setLoading, loading}) {
   const [hasTrailer, setHasTrailer] = useState(true);
 
   const [individualMovie, setIndividualMovie] = useState({});
@@ -17,9 +19,13 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
   const id = useParams().id;
   const navigate = useNavigate();
 
+
+
   useEffect(() => {
+    setLoading(true)
     getMovieDetails(id)
       .then((data) => {
+        setLoading(false)
         setError({
           hasError: false,
           msg: ``,
@@ -41,6 +47,7 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
       });
     getMovieTrailer(id)
       .then((data) => {
+        setLoading(false)
         setError({
           hasError: false,
           msg: ``,
@@ -81,6 +88,7 @@ function MovieDetails({ setTrailer, setError, error, navigateTo404ErrorPage }) {
 
   return (
     <>
+    {loading && <Loading />}
       {error.hasError ? (
         <ErrorPage error={error} />
       ) : (
