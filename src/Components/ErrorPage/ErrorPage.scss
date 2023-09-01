@@ -6,21 +6,20 @@
 .error-page-wrapper {
   background-color: #202124;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;  height: 100vh;
+  position: relative;
 }
 
-.exitError-btn {
-  margin-top: 1rem;
-  align-self: flex-end;
+.exit-error-btn {
+  top: 5%;
+  right: 5%;
+  position: absolute;
 }
 
 .error-wrapper{
   margin: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #202124;
 }
 

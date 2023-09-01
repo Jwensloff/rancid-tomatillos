@@ -14,7 +14,7 @@ function ErrorPage404() {
       />
       <Link to='/'>
         <button
-          className='back-to-home-button'
+          className='error-to-home-button'
         >
           <FontAwesomeIcon icon={faXmark} />
         </button>

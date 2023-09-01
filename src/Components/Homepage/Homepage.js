@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
 function Homepage({ movies, error }) {
+  
   const movieCards = movies.map((movie) => (
     <MoviePoster
       key={movie.id}

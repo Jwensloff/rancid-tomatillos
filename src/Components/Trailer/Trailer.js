@@ -19,14 +19,14 @@ function Trailer({trailer}) {
       <div className='button-wrapper'>
         <Link to={`/${id}`}>
           <button
-            className='back-to-movie-details-button'
+            className='back-to-movie-details-button on-trailer-page-button'
           >
             <FontAwesomeIcon icon={faCircleArrowLeft} />
           </button>
         </Link>
         <Link to='/'>
           <button
-            className='back-to-home-button'
+            className='back-to-home-button on-trailer-page-button'
           >
             <FontAwesomeIcon icon={faHouse} />
           </button>
