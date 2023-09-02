@@ -9,8 +9,9 @@ header{
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center top;
-  height: 40vh;
+  height: 25vh;
   display: flex;
+  flex-direction: column ;
   align-items: center;
   justify-content: center;
 }

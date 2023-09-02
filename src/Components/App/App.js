@@ -11,6 +11,7 @@ import Loading from '../Loading/Loading';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 import Search from '../Search/Search';
+import { faBridge } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -49,7 +50,10 @@ function App() {
   }, []);
 
   const filterMovies = (searchInput) => {
-    setFilteredMovies(movies.filter( movie => movie.title.toLowerCase().includes(searchInput.toLowerCase())))
+    setFilteredMovies(movies.filter( movie => movie.title.toLowerCase().includes(searchInput.toLowerCase())));
+    if (searchInput === '') {
+      console.log('eyy', filteredMovies)
+    }
   }
 
   return (
@@ -62,9 +66,9 @@ function App() {
           path='/'
           element={
             <>
-              <Header />
+              <Header/>
+              <Search filterMovies={filterMovies} />
               {loading && <Loading />}
-              <Search filterMovies={filterMovies}/>
               <Homepage movies={filteredMovies} error={error} />
             </>
           }
