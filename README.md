@@ -5,6 +5,7 @@ Are you ever in the mood to watch a movie, but you can't decide what to watch? W
 
 ## 📷 Preview
 
+![Rancid-short](https://github.com/Jwensloff/rancid-tomatillos/assets/130389530/5b6e1fcb-ae7d-476b-9684-b98a4e888fa3)
 
 
 ## 💻 Technologies Used
