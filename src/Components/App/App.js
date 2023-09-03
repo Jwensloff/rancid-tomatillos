@@ -76,7 +76,7 @@ function App() {
                 setSearchInput={setSearchInput}
               />
               {loading && <Loading />}
-              <Homepage movies={filteredMovies} error={error} />
+              <Homepage filteredMovies={filteredMovies} error={error} />
             </>
           }
         />
@@ -92,7 +92,17 @@ function App() {
             />
           }
         />
-        <Route path='/:id/:trailer' element={<Trailer trailer={trailer} />} />
+
+        <Route
+          path='/:id/:trailer'
+          element={
+            <Trailer
+              trailer={trailer}
+              setLoading={setLoading}
+              loading={loading}
+            />
+          }
+        />
         <Route path='*' element={<ErrorPage404 error={error} />} />
       </Routes>
     </div>

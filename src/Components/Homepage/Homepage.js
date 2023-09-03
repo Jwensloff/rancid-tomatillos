@@ -3,9 +3,12 @@ import MoviePoster from '../MoviePoster/MoviePoster';
 import { arrayOf } from 'prop-types';
 import PropTypes from 'prop-types';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import { useState } from 'react';
 
-function Homepage({ movies, error }) {
-  const movieCards = movies.map(movie => (
+function Homepage({ filteredMovies, error }) {
+  const [notFound, setNotFound] = useState(false)
+
+  const movieCards = filteredMovies.map(movie => (
     <MoviePoster
       key={movie.id}
       id={movie.id}
@@ -25,7 +28,7 @@ function Homepage({ movies, error }) {
 export default Homepage;
 
 Homepage.propTypes = {
-  movies: arrayOf(
+  filteredMovies: arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
       poster_path: PropTypes.string,

@@ -3,14 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
-function Trailer({ trailer }) {
+function Trailer({ trailer, loading, setLoading}) {
   const { key, movie_id } = trailer;
 
   const id = useParams().id;
 
   return (
     <div className='trailer-page'>
+      {loading && <Loading />}
       <div className='button-wrapper'>
         <Link to={`/${id}`}>
           <button className='back-to-movie-details-button on-trailer-page-button'>
