@@ -3,32 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getMovieTrailer } from '../../apiCalls';
 
-function Trailer({trailer}) {
-  const {key, movie_id} = trailer
-  
-    const id = useParams().id
-  
+function Trailer({ trailer }) {
+  const { key, movie_id } = trailer;
 
-
-
+  const id = useParams().id;
 
   return (
     <div className='trailer-page'>
       <div className='button-wrapper'>
         <Link to={`/${id}`}>
-          <button
-            className='back-to-movie-details-button on-trailer-page-button'
-          >
+          <button className='back-to-movie-details-button on-trailer-page-button'>
             <FontAwesomeIcon icon={faCircleArrowLeft} />
           </button>
         </Link>
         <Link to='/'>
-          <button
-            className='back-to-home-button on-trailer-page-button'
-          >
+          <button className='back-to-home-button on-trailer-page-button'>
             <FontAwesomeIcon icon={faHouse} />
           </button>
         </Link>
@@ -47,6 +37,13 @@ function Trailer({trailer}) {
 }
 
 export default Trailer;
+
+Trailer.propTypes = {
+  trailer: PropTypes.shape({
+    key: PropTypes.string,
+    movie_id: PropTypes.string,
+  }),
+};
 
 Trailer.defaultProps = {
   trailer: {

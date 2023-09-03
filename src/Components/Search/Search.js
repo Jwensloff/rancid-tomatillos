@@ -3,6 +3,7 @@ import './Search.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types'
 
 function Search({ filterMovies }) {
   const [searchInput, setSearchInput] = useState('');
@@ -40,3 +41,7 @@ function Search({ filterMovies }) {
 }
 
 export default Search;
+
+Search.propTypes = {
+  filterMovies: PropTypes.func
+}

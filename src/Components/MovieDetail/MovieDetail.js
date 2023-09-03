@@ -140,4 +140,11 @@ export default MovieDetails;
 MovieDetails.propTypes = {
   setTrailer: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    hasError: PropTypes.bool,
+    msg: PropTypes.string,
+    failedAt: PropTypes.string,
+  }),
+  setLoading: PropTypes.func,
+  loading: PropTypes.bool
 };

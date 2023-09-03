@@ -1,6 +1,7 @@
 import './MoviePoster.scss';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+
 function MoviePoster({id, posterPath, title}) {
   return (
     <Link to={`${id}`}>

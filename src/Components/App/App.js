@@ -11,7 +11,6 @@ import Loading from '../Loading/Loading';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import ErrorPage404 from '../ErrorPage404/ErrorPage404';
 import Search from '../Search/Search';
-import { faBridge } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [movies, setMovies] = useState([]);

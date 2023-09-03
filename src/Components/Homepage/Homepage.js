@@ -4,9 +4,8 @@ import { arrayOf } from 'prop-types';
 import PropTypes from 'prop-types';
 import ErrorPage from '../ErrorPage/ErrorPage';
 
-function Homepage({ movies, error}) {
-  
-  const movieCards = movies.map((movie) => (
+function Homepage({ movies, error }) {
+  const movieCards = movies.map(movie => (
     <MoviePoster
       key={movie.id}
       id={movie.id}
@@ -26,5 +25,19 @@ function Homepage({ movies, error}) {
 export default Homepage;
 
 Homepage.propTypes = {
-  movies: arrayOf(PropTypes.object).isRequired,
+  movies: arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      poster_path: PropTypes.string,
+      backdrop_path: PropTypes.string,
+      title: PropTypes.string,
+      average_rating: PropTypes.number,
+      release_date: PropTypes.string,
+    }),
+  ).isRequired,
+  error: PropTypes.shape({
+    hasError: PropTypes.bool,
+    msg: PropTypes.string,
+    failedAt: PropTypes.string,
+  }),
 };
