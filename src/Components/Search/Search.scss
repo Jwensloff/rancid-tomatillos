@@ -1,0 +1,66 @@
+@import '../../variables.scss';
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  height: 2.5rem;
+  width: 15rem;
+  border-radius: .5rem;
+  padding: .2rem;
+  margin-right: 2rem;
+  background-color: $lightGrey;
+
+}
+
+.block {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100vw;
+  height: 4rem;
+  padding: .5rem;
+  background-color: $redAccent;
+}
+
+.search {
+  border: none;
+  border-radius: .5rem;
+  height: 2rem;
+  width: 12rem;
+  background-color: rgb(85, 83, 83);
+
+  &:focus {
+    outline:none;
+    box-shadow: 0 0 0 2px $redAccent;
+  }
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-left: .2rem;
+  border: 0;
+  border-radius: 0 .5rem .5rem 0;
+  background-color: $lightGrey;
+}
+
+.exitSearch-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: auto;
+  padding: 0 1rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius:1rem;
+  background-color: $lightGrey;
+}
+
+.xIcon {
+  margin-left: 1rem;
+}

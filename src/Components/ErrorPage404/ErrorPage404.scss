@@ -1,5 +1,8 @@
+@import '../../variables.scss';
+
+
 .img-wrapper {
-  background-color: #282c34;
+  background-color: $darkGrey;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -15,7 +18,5 @@
 }
 
 .error-to-home-button{
-  top: 5%;
-  right: 5%;
-  position: absolute;
+ @include errorCornerButton;
 }

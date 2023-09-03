@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-import PropTypes, { array, arrayOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { getMovieTrailer, getMovieDetails } from '../../apiCalls';
 import { useEffect, useState } from 'react';
@@ -140,4 +140,11 @@ export default MovieDetails;
 MovieDetails.propTypes = {
   setTrailer: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  error: PropTypes.shape({
+    hasError: PropTypes.bool,
+    msg: PropTypes.string,
+    failedAt: PropTypes.string,
+  }),
+  setLoading: PropTypes.func,
+  loading: PropTypes.bool
 };
