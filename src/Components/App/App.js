@@ -16,6 +16,7 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [trailer, setTrailer] = useState({});
   const [loading, setLoading] = useState(true);
+  const [searchInput, setSearchInput] = useState('');
   const [error, setError] = useState({
     hasError: false,
     msg: '',
@@ -47,6 +48,10 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    filterMovies(searchInput);
+  }, [searchInput]);
+
   const filterMovies = searchInput => {
     setFilteredMovies(
       movies.filter(movie =>
@@ -65,7 +70,11 @@ function App() {
           element={
             <>
               <Header />
-              <Search filterMovies={filterMovies} />
+              <Search
+                filterMovies={filterMovies}
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+              />
               {loading && <Loading />}
               <Homepage movies={filteredMovies} error={error} />
             </>

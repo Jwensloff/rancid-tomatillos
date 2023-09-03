@@ -1,13 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Search.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-function Search({ filterMovies }) {
-  const [searchInput, setSearchInput] = useState('');
-
+function Search({ searchInput, setSearchInput }) {
   return (
     <div className='block'>
       {searchInput && (
@@ -15,11 +13,12 @@ function Search({ filterMovies }) {
           className='exitSearch-btn'
           onClick={() => {
             setSearchInput('');
-            filterMovies('');
           }}
         >
           {searchInput}
-          <i className='xIcon'><FontAwesomeIcon icon={faXmark} color='white' /></i>
+          <i className='xIcon'>
+            <FontAwesomeIcon icon={faXmark} color='white' />
+          </i>
         </button>
       )}
       <form className='searchForm'>
@@ -30,7 +29,6 @@ function Search({ filterMovies }) {
           onChange={e => {
             setSearchInput(e.target.value);
           }}
-          onKeyUp={() => filterMovies(searchInput)}
         />
         <div className='search-btn'>
           <FontAwesomeIcon icon={faMagnifyingGlass} color='white' />
@@ -43,5 +41,6 @@ function Search({ filterMovies }) {
 export default Search;
 
 Search.propTypes = {
-  filterMovies: PropTypes.func
-}
+  setSearchInput: PropTypes.func,
+  searchInput: PropTypes.string
+};

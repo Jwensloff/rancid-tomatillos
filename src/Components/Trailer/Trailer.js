@@ -41,7 +41,7 @@ export default Trailer;
 Trailer.propTypes = {
   trailer: PropTypes.shape({
     key: PropTypes.string,
-    movie_id: PropTypes.string,
+    movie_id: PropTypes.number,
   }),
 };
 
