@@ -3,10 +3,19 @@ import MoviePoster from '../MoviePoster/MoviePoster';
 import { arrayOf } from 'prop-types';
 import PropTypes from 'prop-types';
 import ErrorPage from '../ErrorPage/ErrorPage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 function Homepage({ filteredMovies, error }) {
   const [notFound, setNotFound] = useState(false)
+
+useEffect(() => {
+  if(!filteredMovies.length){
+    setNotFound(true);
+  } else {
+    setNotFound(false)
+  }
+},[filteredMovies])
 
   const movieCards = filteredMovies.map(movie => (
     <MoviePoster
@@ -19,6 +28,7 @@ function Homepage({ filteredMovies, error }) {
 
   return (
     <div className='moviesContainer'>
+      {notFound && <p>Movie not found.</p>}
       {movieCards}
       {error.hasError && <ErrorPage error={error} />}
     </div>

@@ -33,7 +33,7 @@ This was the first project for mod 3 at Turing School of Software & Design. The 
 
 ## 🔧 Installation and Setup Instructions
 
-You can find the application [here](https://jwensloff.github.io/AirborneOdyssey/).
+You can find the application [here](https://jwensloff.github.io/rancid-tomatillos/).
 
 Alternatively, you can:
 Clone down this repository to run the front-end application. Additionally, you will need to navigate to this 
