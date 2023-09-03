@@ -33,6 +33,7 @@ function App() {
         setFilteredMovies(data.movies);
       })
       .catch(error => {
+        console.log('error -->',error)
         setLoading(false);
         setError({
           hasError: true,
