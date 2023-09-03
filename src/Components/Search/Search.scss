@@ -28,11 +28,12 @@
   border-radius: .5rem;
   height: 2rem;
   width: 12rem;
-  background-color: rgb(85, 83, 83);
+  background-color: #555353;
 
   &:focus {
     outline:none;
     box-shadow: 0 0 0 2px $redAccent;
+    background-color: #A0A0A0;
   }
 }
 

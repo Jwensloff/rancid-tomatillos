@@ -21,7 +21,7 @@ function Search({ searchInput, setSearchInput }) {
           </i>
         </button>
       )}
-      <form className='searchForm'>
+      <form className='searchForm' onSubmit={e => e.preventDefault()}>
         <input
           className='search'
           type='search'
