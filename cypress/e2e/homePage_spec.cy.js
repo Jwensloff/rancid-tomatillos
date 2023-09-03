@@ -40,5 +40,9 @@ describe('homepage', () => {
     cy.get('.moviesContainer').find('.moviePoster').should('have.length', 4)
     cy.get('.moviePoster').first().should('have.id', '436270')
     cy.get('.moviePoster').last().should('have.id', '1013860')
+
+    cy.get('.search').type('dfjkdfn')
+    cy.get('.moviesContainer').find('.moviePoster').should('have.length', 0)
+    cy.contains('Movie not found.')
   })
 })
