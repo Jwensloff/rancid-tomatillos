@@ -1,7 +1,9 @@
+@import '../../variables.scss';
+
 .moviesContainer {
-  border: maroon solid 2rem;
+  border: $redAccent solid 2rem;
   border-width: 0 2rem 2rem 2rem;
-  background-color: #202124;
+  background-color: $darkGrey;
   padding: 50px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

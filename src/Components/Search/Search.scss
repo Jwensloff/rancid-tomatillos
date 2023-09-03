@@ -1,24 +1,26 @@
+@import '../../variables.scss';
+
 .searchForm {
-  height: 2.5rem;
-  width: 15rem;
   display: flex;
   align-items: center;
   justify-content: end;
-  background-color: grey;
+  height: 2.5rem;
+  width: 15rem;
   border-radius: .5rem;
   padding: .2rem;
   margin-right: 2rem;
+  background-color: $lightGrey;
 
 }
 
 .block {
   display: flex;
-  padding: .5rem;
   justify-content: end;
   align-items: center;
   width: 100vw;
   height: 4rem;
-  background-color: maroon;
+  padding: .5rem;
+  background-color: $redAccent;
 }
 
 .search {
@@ -30,33 +32,33 @@
 
   &:focus {
     outline:none;
-    box-shadow: 0 0 0 2px maroon;
+    box-shadow: 0 0 0 2px $redAccent;
   }
 }
 
 .search-btn {
-  margin-left: .2rem;
-  background-color: grey;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
   height: 2.5rem;
   width: 2.5rem;
+  margin-left: .2rem;
+  border: 0;
   border-radius: 0 .5rem .5rem 0;
+  background-color: $lightGrey;
 }
 
 .exitSearch-btn {
-  padding: 0 1rem;
-  margin-right: 1rem;
-  background-color: grey;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
   height: 2.5rem;
   width: auto;
+  padding: 0 1rem;
+  margin-right: 1rem;
+  border: none;
   border-radius:1rem;
+  background-color: $lightGrey;
 }
 
 .xIcon {

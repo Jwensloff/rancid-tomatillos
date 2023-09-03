@@ -1,26 +1,26 @@
+@import '../../variables.scss';
+
 @font-face {
   font-family: 'upperEastSide';
   src: url('../../fonts/upperEastSide/UpperEastSide.ttf') format('truetype');
 }
 
 .error-page-wrapper {
-  background-color: #202124;
-  display: flex;
   display: flex;
   align-items: center;
   justify-content: center;  height: 100vh;
   position: relative;
+  background-color: $darkGrey;
+  padding: 5rem;
 }
 
 .exit-error-btn {
-  top: 5%;
-  right: 5%;
-  position: absolute;
+  @include errorCornerButton;
 }
 
 .error-wrapper{
   margin: 0px;
-  background-color: #202124;
+  background-color: $darkGrey;
 }
 
 p{

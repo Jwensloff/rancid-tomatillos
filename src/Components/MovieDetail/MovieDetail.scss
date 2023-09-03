@@ -1,10 +1,12 @@
+@import '../../variables.scss';
+
 .movieDetails {
-  border: solid 2rem maroon;
+  border: solid 2rem $redAccent;
   display: flex;
   flex-direction: column;
   position: relative;
   min-height: 100vh;
-  background-color: #282c34;
+  background-color: $darkGrey;
 }
 
 .movieDetails__img {
@@ -24,7 +26,6 @@
     rgba(32, 33, 36, 0.8) 53%,
     rgba(0, 0, 0, 0) 100%
   );
-  
 }
 
 .movieDetails__btn {
@@ -51,8 +52,6 @@
   margin: 0 1rem;
   font-size: 3rem;
   color: white;
-  // margin-bottom: 0px;
-  // margin-left: 1rem;
 }
 
 .movie-details-sub {
@@ -61,19 +60,15 @@
 }
 
 .button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
+  @include cornerButton;
 }
 
 .trailer-btn {
-  margin-left: 1rem;
   height: 2.5rem;
   width: 7rem;
-  cursor: pointer;
+  margin-left: 1rem;
   font-size: 1.25rem;
-  // border-radius: 50%;
+  cursor: pointer;
 }
 
 .title-wrapper {
@@ -83,12 +78,12 @@
 
 @media screen and (max-width: 612px) {
   .movieDetails__block {
-    padding: 1rem;
     position: static;
-    width: 100%;
-    background: none;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    background: none;
   }
 
   .movie-details-sub {
@@ -104,7 +99,6 @@
   .overview {
     margin-top: 1rem;
     width: 100%;
-    
   }
 
   .title-wrapper {

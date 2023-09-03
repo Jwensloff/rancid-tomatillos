@@ -1,7 +1,9 @@
+@import '../../variables.scss';
+
 .loading-wrapper {
   position: relative;
-  border: solid 2rem maroon;
-  background-color: #202124;
+  border: solid 2rem $redAccent;
+  background-color: $darkGrey;
   display: flex;
   flex-direction: column;
   justify-content: center;
