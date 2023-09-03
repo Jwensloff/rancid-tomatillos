@@ -79,7 +79,7 @@ describe('From movie details:', () => {
 
     cy.get('.moviesContainer').find('.moviePoster').should('have.length', 4);
     cy.get('.moviePoster').first().should('have.id', '436270');
-    cy.get('.moviePoster').last().should('have.id', '505642');
+    cy.get('.moviePoster').last().should('have.id', '1013860');
   });
 });
 
