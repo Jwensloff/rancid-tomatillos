@@ -94,14 +94,14 @@ function MovieDetails({ setTrailer, setError, error, setLoading, loading}) {
       ) : (
         <section className='movieDetails'>
           <img className='movieDetails__img' src={backdrop_path} />
-          <Link className='button' to='/'>
+          <Link className='button' to='/rancid-tomatillos'>
             <FontAwesomeIcon icon={faXmark} color='white' size='2x' />
           </Link>
           <section className='movieDetails__block'>
             <div className='title-wrapper'>
               <h2 className='movieDetails__title'>{title}</h2>
               {hasTrailer && (
-                <Link to={`/${id}/trailer`}>
+                <Link to={`/rancid-tomatillos/${id}/trailer`}>
                   <button className='trailer-btn'>
                     <FontAwesomeIcon
                       icon={faYoutube}

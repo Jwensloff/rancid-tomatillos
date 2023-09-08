@@ -8,7 +8,7 @@ function ErrorPage({ error }) {
   return (
     <section className='error-page-wrapper'>
       {error.failedAt === 'indvidualMovie' && (
-        <Link className='exit-error-btn' to='/'>
+        <Link className='exit-error-btn' to='/rancid-tomatillos'>
           <FontAwesomeIcon icon={faXmark} color='white' size='2x' />
         </Link>
       )}

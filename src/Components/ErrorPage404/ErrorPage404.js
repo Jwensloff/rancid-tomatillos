@@ -10,7 +10,7 @@ function ErrorPage404({ error }) {
     <div className='img-wrapper'>
       <img className='img' src={img} alt={'404 error, page not found'} />
       {error.failedAt !== 'homePage' && (
-        <Link to='/'>
+        <Link to='/rancid-tomatillos'>
           <button className='error-to-home-button'>
             <FontAwesomeIcon icon={faHouse} />
           </button>

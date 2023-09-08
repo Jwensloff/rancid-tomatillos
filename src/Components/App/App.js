@@ -51,6 +51,7 @@ function App() {
 
   useEffect(() => {
     filterMovies(searchInput);
+    console.log('filteredMovies',filteredMovies)
   }, [searchInput]);
 
   const filterMovies = searchInput => {
@@ -67,7 +68,7 @@ function App() {
         <Route path='/error404' element={<ErrorPage404 error={error} />} />
         <Route path='/error' element={<ErrorPage error={error} />} />
         <Route
-          path='/'
+          path='/rancid-tomatillos'
           element={
             <>
               <Header />
@@ -82,7 +83,7 @@ function App() {
           }
         />
         <Route
-          path='/:id'
+          path='/rancid-tomatillos/:id'
           element={
             <MovieDetails
               setTrailer={setTrailer}
@@ -95,7 +96,7 @@ function App() {
         />
 
         <Route
-          path='/:id/:trailer'
+          path='/rancid-tomatillos/:id/:trailer'
           element={
             <Trailer
               trailer={trailer}
