@@ -14,12 +14,12 @@ function Trailer({ trailer, loading, setLoading}) {
     <div className='trailer-page'>
       {loading && <Loading />}
       <div className='button-wrapper'>
-        <Link to={`/${id}`}>
+        <Link to={`/rancid-tomatillos/${id}`}>
           <button className='back-to-movie-details-button on-trailer-page-button'>
             <FontAwesomeIcon icon={faCircleArrowLeft} />
           </button>
         </Link>
-        <Link to='/'>
+        <Link to='/rancid-tomatillos'>
           <button className='back-to-home-button on-trailer-page-button'>
             <FontAwesomeIcon icon={faHouse} />
           </button>
