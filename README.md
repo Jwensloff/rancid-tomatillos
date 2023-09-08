@@ -34,5 +34,5 @@ This was the first project for mod 3 at Turing School of Software & Design. The 
 
 ## 🔧 Installation and Setup Instructions
 
-You can find the application [here](https://jwensloff.github.io/rancid-tomatillos/).
+You can find the deployed application [here](https://jwensloff.github.io/rancid-tomatillos/).
 
