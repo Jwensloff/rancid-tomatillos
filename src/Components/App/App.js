@@ -33,7 +33,6 @@ function App() {
         setFilteredMovies(data.movies);
       })
       .catch(error => {
-        console.log('error -->',error)
         setLoading(false);
         setError({
           hasError: true,
@@ -51,7 +50,6 @@ function App() {
 
   useEffect(() => {
     filterMovies(searchInput);
-    console.log('filteredMovies',filteredMovies)
   }, [searchInput]);
 
   const filterMovies = searchInput => {
